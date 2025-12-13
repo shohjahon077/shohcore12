@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOHJAHON MAHKAMOV | ULTIMATE Mobilografiya</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ====================================
+           I. GLOBAL & ANIMATSIYA ASOSLARI
+           ==================================== */
+        :root {
+            --dark-bg: #000000;
+            --light-text: #f0f0f0;
+            --accent-color: #00ff99; /* Elektr Yashil */
+            --section-padding: 140px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Sektsiyalar */
+        section {
+            padding: var(--section-padding) 8vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        /* Kirish Animatsiyasi Boshlang'ich Holati */
+        .anim-hidden {
+            opacity: 0;
+            transform: translateY(60px) scale(0.98);
+            transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), 
+                        transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .anim-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ====================================
+           II. NAVIGATSIYA & MOBIL MENYU (Yangi Funksiya)
+           ==================================== */
+        header {
+            position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; 
+            align-items: center; padding: 25px 8vw; z-index: 1000; 
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px);
+            transition: transform 0.5s ease-out;
+        }
+        
+        nav a {
+            color: var(--light-text); text-decoration: none; margin-left: 35px; 
+            font-size: 0.95rem; text-transform: uppercase; transition: color 0.3s;
+        }
+
+        /* Burger Ikonkasi */
+        .menu-toggle {
+            display: none; /* Desktopda yashirish */
+            cursor: pointer;
+            z-index: 1100;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+        
+        /* Mobil Menyu Uslubi */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%); /* Boshida yashirish */
+            transition: transform 0.4s ease-in-out;
+            z-index: 999;
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0); /* Ochish */
+        }
+        
+        .mobile-nav a {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        /* ====================================
+           III. KURSOR EFFEKTI & DIZAYN
+           ==================================== */
+        #cursor-follower {
+            position: fixed; width: 10px; height: 10px; border-radius: 50%; 
+            background-color: var(--accent-color); pointer-events: none; 
+            transform: translate(-50%, -50%); transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background-color 0.3s; 
+            z-index: 9999; filter: blur(3px); opacity: 0.9; 
+        }
+        .cursor-active {
+            width: 60px !important; height: 60px !important; background-color: transparent !important;
+            border: 2px solid var(--accent-color); filter: none !important; opacity: 1 !important;
+        }
+        
+        /* Tugma Uslublari */
+        .btn {
+            background: var(--accent-color); color: var(--dark-bg); border: none; padding: 18px 45px; 
+            font-size: 1.2rem; font-weight: 700; text-transform: uppercase; cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); text-decoration: none; border-radius: 3px; 
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+        }
+        .btn:hover {
+            background: var(--light-text); box-shadow: 0 0 25px var(--accent-color); 
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Portfolio Grid (CSS Grid yordamida optimallashtirildi) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        /* ====================================
+           IV. MOBIL MOSLASHUVCHANLIK (ENG MUHIM QISM)
+           ==================================== */
+        @media (max-width: 900px) {
+            /* Navigatsiyani yashirish va Burger menyuni ko'rsatish */
+            nav { display: none; }
+            .menu-toggle { display: block; }
+
+            /* Asosiy Sarlavhani kichraytirish */
+            h1 { font-size: 3.5rem !important; letter-spacing: 3px !important; }
+            h2 { font-size: 2.5rem; margin-bottom: 40px; }
+            .subtitle { font-size: 1.2rem !important; }
+            .stats-block { flex-direction: column; }
+            .stat-item { margin-bottom: 30px; }
+            
+            /* Kursor effektini o'chirish */
+            body { cursor: auto; } 
+            #cursor-follower { display: none; } 
+            
+            /* Sektor paddingini kichraytirish */
+            section { padding: 100px 5vw; min-height: auto; }
+            .service-grid { flex-direction: column; gap: 20px; }
+        }
+        
+        @media (max-width: 500px) {
+            h1 { font-size: 2.8rem !important; }
+            .btn { padding: 12px 25px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-follower"></div>
+
+    <header>
+        <a href="#home" class="logo" style="font-size: 1.8rem; font-weight: 900; color: var(--accent-color); text-decoration: none;">S.M.</a>
+        
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#portfolio">PORTFOLIO</a>
+            <a href="#xizmatlar">XIZMATLAR</a>
+            <a href="#contact">ALOQA</a>
+        </nav>
+        
+        <div class="menu-toggle" id="menu-open">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+    
+    <div class="mobile-nav" id="mobile-menu">
+        <div class="menu-toggle" id="menu-close" style="position: absolute; top: 30px; right: 8vw;">
+            <i class="fas fa-times"></i>
+        </div>
+        <a href="#home" class="mobile-link">HOME</a>
+        <a href="#portfolio" class="mobile-link">PORTFOLIO</a>
+        <a href="#xizmatlar" class="mobile-link">XIZMATLAR</a>
+        <a href="#contact" class="mobile-link">ALOQA</a>
+    </div>
+
+    <section id="home">
+        <h1 id="hero-title" style="font-size: 6.5rem; font-weight: 900; letter-spacing: 8px; text-transform: uppercase; color: var(--light-text); margin-bottom: 20px;">
+            <div class="text-line"><span>SHOHJAHON</span></div>
+            <div class="text-line"><span>MAHKAMOV</span></div>
+        </h1>
+        <p class="subtitle anim-hidden" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 60px;" data-delay="1.2">
+            
+        </p>
+        <a href="#portfolio" class="btn anim-hidden" data-delay="1.4">PORTFOLIONING KO'RISH</a>
+    </section>
+
+    <section id="stats" style="min-height: 40vh; padding: 80px 8vw; background-color: #0d0d0d;">
+        <div class="stats-block anim-hidden" style="display: flex; justify-content: space-around; width: 100%; max-width: 1200px; text-align: center;">
+            <div class="stat-item anim-hidden" data-delay="0.1">
+                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">0+</p>
+                <p style="font-size: 1rem; color: #aaa;">YAKUNLANGAN LOYIHALAR</p>
+            </div>
+            <div class="stat-item anim-hidden" data-delay="0.2">
+                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">1080p</p>
+                <p style="font-size: 1rem; color: #aaa;">MAKSIMAL SIFAT (Montajda)</p>
+            </div>
+            <div class="stat-item anim-hidden" data-delay="0.3">
+                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">100%</p>
+                <p style="font-size: 1rem; color: #aaa;">MOBIL/CINEMA YONDASHUV</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="anim-hidden">TANLANGAN LOYIHALAR</h2>
+        <div class="portfolio-grid">
+            
+            <a href="#" class="project-card anim-hidden" data-delay="0.1" style="text-decoration: none; overflow: hidden; position: relative; border: 2px solid rgba(0, 255, 153, 0.1);">
+                <img src="https://via.placeholder.com/700x500/000000?text=BRANDING+VIDEO" alt="Reklama" style="width: 100%; display: block; transition: transform 0.6s ease-out;" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+                <div class="project-info" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); padding: 25px; text-align: left;">
+                    <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px;">Brend Loyihalari</h3>
+                    <p style="font-family: 'Space Mono', monospace; color: #aaaaaa;">Dinamik post-produksiya.</p>
+                </div>
+            </a>
+            
+            <a href="#" class="project-card anim-hidden" data-delay="0.2" style="text-decoration: none; overflow: hidden; position: relative; border: 2px solid rgba(0, 255, 153, 0.1);">
+                <img src="https://via.placeholder.com/700x500/000000?text=MUSIC+VIDEO" alt="Art Klip" style="width: 100%; display: block; transition: transform 0.6s ease-out;" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+                <div class="project-info" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); padding: 25px; text-align: left;">
+                    <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px;">Musiqiy Kadrlar</h3>
+                    <p style="font-family: 'Space Mono', monospace; color: #aaaaaa;">Badiiy yechimlar va rang.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="xizmatlar" style="background-color: #0d0d0d;">
+        <h2 class="anim-hidden">XIZMATLAR VA VIZUAL STRATEGIYA</h2>
+        <div class="service-grid anim-hidden" style="display: flex; gap: 40px; max-width: 1200px; width: 100%; justify-content: center;" data-delay="0.2">
+            
+            <div class="service-item anim-hidden" style="flex: 1; border: 2px solid var(--accent-color); padding: 40px 30px; border-radius: 10px; transition: all 0.4s; cursor: default;" onmouseenter="this.style.backgroundColor='#1a1a1a'" onmouseleave="this.style.backgroundColor='transparent'" data-delay="0.3">
+                <i class="fas fa-video" style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;"></i>
+                <h3 style="color: var(--light-text); margin-bottom: 10px; font-family: 'Space Mono', monospace;">FULL PRODUCTION</h3>
+                <p style="color: #aaaaaa;">G'oyani vizual asarga aylantirish.</p>
+            </div>
+
+            <div class="service-item anim-hidden" style="flex: 1; border: 2px solid var(--accent-color); padding: 40px 30px; border-radius: 10px; transition: all 0.4s; cursor: default;" onmouseenter="this.style.backgroundColor='#1a1a1a'" onmouseleave="this.style.backgroundColor='transparent'" data-delay="0.4">
+                <i class="fas fa-cut" style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;"></i>
+                <h3 style="color: var(--light-text); margin-bottom: 10px; font-family: 'Space Mono', monospace;">POST-PRODUCTION</h3>
+                <p style="color: #aaaaaa;">Professional montaj va rang berish ($DaVinci$ sathi).</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="anim-hidden">FILOSOFIYA</h2>
+        <div class="anim-hidden" data-delay="0.2" style="max-width: 900px;">
+             <p style="font-size: 1.4rem; line-height: 1.8; margin-bottom: 40px; color: var(--light-text);">
+                Men mobil videografiyada **minimalizm** va **maksimal effekt** tamoyillariga amal qilaman. Men uchun telefon — bu shunchaki vosita, ammo natija — bu **kino standartlari**ga mos keladigan yuqori sinf kontent. Meni tanlagan mijozlar texnologiyaga emas, balki ijodiy yechimga sarmoya kiritadi.
+             </p>
+             <p style="font-family: 'Space Mono', monospace; color: var(--accent-color); font-size: 1.1rem;">
+                 // VISION & EXECUTION
+             </p>
+        </div>
+    </section>
+
+    <section id="contact" style="min-height: 50vh; background-color: #0d0d0d;">
+        <h2 class="anim-hidden">KEYINGI LOYIHA</h2>
+        
+        <div class="anim-hidden" data-delay="0.2">
+            <p style="margin-bottom: 40px; font-size: 1.2rem;">
+                Keling, loyihangizni birgalikda muhokama qilaylik.
+            </p>
+            
+            <a href="mailto:shohjahon@example.com" class="btn" style="background: none; border: 2px solid var(--accent-color); color: var(--accent-color); margin-right: 30px;">
+                <i class="fas fa-envelope"></i> E-POCHTA
+            </a>
+
+            <a href="" class="btn" style="background: none; border: 2px solid #55acee; color: #55acee;">
+                <i class="fab fa-telegram-plane"></i> TELEGRAM
+            </a>
+        </div>
+    </section>
+    
+    <footer style="padding: 30px; text-align: center; font-size: 0.8rem; color: #444; background-color: var(--dark-bg);">
+        <p>&copy; 2025 SHOHJAHON MAHKAMOV. MOBIL CINEMA.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorFollower = document.getElementById('cursor-follower');
+            const interactiveElements = document.querySelectorAll('a, button, .project-card, .service-item, nav a, .menu-toggle');
+            const animatables = document.querySelectorAll('.anim-hidden');
+            const heroTitleLines = document.querySelectorAll('#hero-title .text-line');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpen = document.getElementById('menu-open');
+            const menuClose = document.getElementById('menu-close');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            // --- 1. Mobil Menyu Boshqaruvi ---
+            menuOpen.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+
+            menuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+            
+            // Mobil menyudagi linkni bosganda yopish
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+
+
+            // --- 2. Kursor Harakati Logikasi (Mobil/Desktop farqi bilan) ---
+            if (window.innerWidth > 900) {
+                document.addEventListener('mousemove', (e) => {
+                    cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                });
+
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursorFollower.classList.add('cursor-active');
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        cursorFollower.classList.remove('cursor-active');
+                    });
+                });
+            } else {
+                 // Mobil qurilmalarda kursor effektini o'chirish
+                if (cursorFollower) cursorFollower.style.display = 'none';
+                document.body.style.cursor = 'auto';
+            }
+            
+            // --- 3. Scroll Paytida Animatsiyalar Logikasi ---
+            const checkInView = () => {
+                const triggerPoint = window.innerHeight * 0.85;
+
+                animatables.forEach(el => {
+                    if (el.classList.contains('anim-visible')) return; 
+
+                    const elTop = el.getBoundingClientRect().top;
+                    const delay = parseFloat(el.getAttribute('data-delay')) || 0; 
+
+                    if (elTop < triggerPoint) {
+                        setTimeout(() => {
+                            el.classList.add('anim-visible');
+                        }, delay * 1000);
+                    }
+                });
+            };
+
+            // --- 4. Bosh Sahifa Matn Animatsiyasi (Super Kirish) ---
+            const animateHeroTitle = () => {
+                let globalDelay = 0;
+                
+                heroTitleLines.forEach(line => {
+                    line.classList.add('animate');
+                    line.style.transitionDelay = `${globalDelay}s`;
+                    globalDelay += 0.3; 
+                });
+            };
+
+            // Animatsiyalarni boshlash
+            window.addEventListener('scroll', checkInView);
+            
+            setTimeout(() => {
+                animateHeroTitle();
+                checkInView(); 
+            }, 500); 
+        });
+    </script>
+</body>
+</html>
