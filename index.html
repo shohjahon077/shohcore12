@@ -3,399 +3,840 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOHJAHON MAHKAMOV | ULTIMATE Mobilografiya</title>
+    <title>YMT HUB | Professional Xizmatlar Markazi</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* ====================================
-           I. GLOBAL & ANIMATSIYA ASOSLARI
-           ==================================== */
-        :root {
-            --dark-bg: #000000;
-            --light-text: #f0f0f0;
-            --accent-color: #00ff99; /* Elektr Yashil */
-            --section-padding: 140px;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+    /* Asosiy sozlamalar */
+:root {
+    --primary: #6a11cb;
+    --secondary: #2575fc;
+    --accent: #ff8a00;
+    --dark: #121826;
+    --light: #f8f9fa;
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            font-family: 'Montserrat', sans-serif;
-            cursor: none;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        /* Sektsiyalar */
-        section {
-            padding: var(--section-padding) 8vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            overflow: hidden;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        /* Kirish Animatsiyasi Boshlang'ich Holati */
-        .anim-hidden {
-            opacity: 0;
-            transform: translateY(60px) scale(0.98);
-            transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), 
-                        transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .anim-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: var(--light);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
 
-        /* ====================================
-           II. NAVIGATSIYA & MOBIL MENYU (Yangi Funksiya)
-           ==================================== */
-        header {
-            position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; 
-            align-items: center; padding: 25px 8vw; z-index: 1000; 
-            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px);
-            transition: transform 0.5s ease-out;
-        }
-        
-        nav a {
-            color: var(--light-text); text-decoration: none; margin-left: 35px; 
-            font-size: 0.95rem; text-transform: uppercase; transition: color 0.3s;
-        }
+/* Kirish Animatsiyasi */
+.loader-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(45deg, var(--dark), #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-out;
+}
 
-        /* Burger Ikonkasi */
-        .menu-toggle {
-            display: none; /* Desktopda yashirish */
-            cursor: pointer;
-            z-index: 1100;
-            font-size: 1.8rem;
-            color: var(--accent-color);
-        }
-        
-        /* Mobil Menyu Uslubi */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: translateX(100%); /* Boshida yashirish */
-            transition: transform 0.4s ease-in-out;
-            z-index: 999;
-        }
+.logo-loader h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
 
-        .mobile-nav.open {
-            transform: translateX(0); /* Ochish */
-        }
-        
-        .mobile-nav a {
-            font-size: 2rem;
-            margin: 20px 0;
-            color: var(--light-text);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        /* ====================================
-           III. KURSOR EFFEKTI & DIZAYN
-           ==================================== */
-        #cursor-follower {
-            position: fixed; width: 10px; height: 10px; border-radius: 50%; 
-            background-color: var(--accent-color); pointer-events: none; 
-            transform: translate(-50%, -50%); transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background-color 0.3s; 
-            z-index: 9999; filter: blur(3px); opacity: 0.9; 
-        }
-        .cursor-active {
-            width: 60px !important; height: 60px !important; background-color: transparent !important;
-            border: 2px solid var(--accent-color); filter: none !important; opacity: 1 !important;
-        }
-        
-        /* Tugma Uslublari */
-        .btn {
-            background: var(--accent-color); color: var(--dark-bg); border: none; padding: 18px 45px; 
-            font-size: 1.2rem; font-weight: 700; text-transform: uppercase; cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); text-decoration: none; border-radius: 3px; 
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
-        }
-        .btn:hover {
-            background: var(--light-text); box-shadow: 0 0 25px var(--accent-color); 
-            transform: translateY(-5px) scale(1.05);
-        }
+.logo-loader span { color: var(--accent); }
+.tagline {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-        /* Portfolio Grid (CSS Grid yordamida optimallashtirildi) */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            width: 100%;
-            max-width: 1400px;
-        }
+.txt-rotate { color: var(--accent); font-weight: 600; }
 
-        /* ====================================
-           IV. MOBIL MOSLASHUVCHANLIK (ENG MUHIM QISM)
-           ==================================== */
-        @media (max-width: 900px) {
-            /* Navigatsiyani yashirish va Burger menyuni ko'rsatish */
-            nav { display: none; }
-            .menu-toggle { display: block; }
+.loader-bar {
+    width: 300px; height: 8px;
+    background: var(--glass);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-            /* Asosiy Sarlavhani kichraytirish */
-            h1 { font-size: 3.5rem !important; letter-spacing: 3px !important; }
-            h2 { font-size: 2.5rem; margin-bottom: 40px; }
-            .subtitle { font-size: 1.2rem !important; }
-            .stats-block { flex-direction: column; }
-            .stat-item { margin-bottom: 30px; }
-            
-            /* Kursor effektini o'chirish */
-            body { cursor: auto; } 
-            #cursor-follower { display: none; } 
-            
-            /* Sektor paddingini kichraytirish */
-            section { padding: 100px 5vw; min-height: auto; }
-            .service-grid { flex-direction: column; gap: 20px; }
-        }
-        
-        @media (max-width: 500px) {
-            h1 { font-size: 2.8rem !important; }
-            .btn { padding: 12px 25px; font-size: 1rem; }
-        }
+.loader-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    animation: loading 3s ease-in-out forwards;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Asosiy kontent */
+.hidden { display: none; }
+
+/* Glassmorphism effekti */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 1000;
+    padding: 1.2rem 2rem;
+    transition: all 0.4s ease;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-menu a:hover { color: var(--accent); }
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s;
+}
+
+.nav-menu a:hover::after { width: 100%; }
+
+.nav-highlight {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+}
+
+.hamburger { display: none; cursor: pointer; }
+.bar {
+    display: block;
+    width: 25px; height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* Hero Bo'limi */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+#bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.4;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, rgba(10, 10, 30, 0.9) 70%);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-title span {
+    background: linear-gradient(45deg, var(--accent), #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.animate-pop {
+    animation: popIn 1s ease-out 0.5s both;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 138, 0, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 138, 0, 0); }
+}
+
+/* Xizmatlar kartalari */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.service-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.service-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Forma dizayni */
+.form-container {
+    max-width: 700px;
+    margin: 3rem auto 0;
+    padding: 3rem;
+}
+
+.form-group {
+    margin-bottom: 1.8rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--glass-border);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.2);
+}
+
+.btn-block { width: 100%; }
+
+.form-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.form-success {
+    text-align: center;
+    padding: 3rem;
+}
+
+.form-success i {
+    font-size: 5rem;
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+}
+
+/* Mobil moslashuv */
+@media (max-width: 992px) {
+    .hero-title { font-size: 2.8rem; }
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 90px;
+        flex-direction: column;
+        background: rgba(18, 24, 38, 0.95);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        gap: 0;
+    }
+    .nav-menu.active {
+        left: 0;
+        border-top: 1px solid var(--glass-border);
+    }
+    .nav-menu li { margin: 1.2rem 0; }
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 300px; }
+    .services-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+    .form-container { padding: 2rem; }
+}
+
+@media (max-width: 576px) {
+    .hero-title { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .logo-loader h1 { font-size: 3.5rem; }
+    .section-title { font-size: 2rem; }
+}
     </style>
 </head>
 <body>
-
-    <div id="cursor-follower"></div>
-
-    <header>
-        <a href="#home" class="logo" style="font-size: 1.8rem; font-weight: 900; color: var(--accent-color); text-decoration: none;">S.M.</a>
-        
-        <nav>
-            <a href="#home">HOME</a>
-            <a href="#portfolio">PORTFOLIO</a>
-            <a href="#xizmatlar">XIZMATLAR</a>
-            <a href="#contact">ALOQA</a>
-        </nav>
-        
-        <div class="menu-toggle" id="menu-open">
-            <i class="fas fa-bars"></i>
+    <!-- Kirish Animatsiyasi Sahifasi -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="logo-loader">
+                <h1 class="animating-logo">YMT<span>HUB</span></h1>
+                <p class="tagline">Professional <span class="txt-rotate" data-period="2000" data-rotate='[ "Xizmatlar.", "Yechimlar.", "Natijalar.", "Ishonch." ]'></span></p>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
         </div>
-    </header>
-    
-    <div class="mobile-nav" id="mobile-menu">
-        <div class="menu-toggle" id="menu-close" style="position: absolute; top: 30px; right: 8vw;">
-            <i class="fas fa-times"></i>
-        </div>
-        <a href="#home" class="mobile-link">HOME</a>
-        <a href="#portfolio" class="mobile-link">PORTFOLIO</a>
-        <a href="#xizmatlar" class="mobile-link">XIZMATLAR</a>
-        <a href="#contact" class="mobile-link">ALOQA</a>
     </div>
 
-    <section id="home">
-        <h1 id="hero-title" style="font-size: 6.5rem; font-weight: 900; letter-spacing: 8px; text-transform: uppercase; color: var(--light-text); margin-bottom: 20px;">
-            <div class="text-line"><span>SHOHJAHON</span></div>
-            <div class="text-line"><span>MAHKAMOV</span></div>
-        </h1>
-        <p class="subtitle anim-hidden" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 60px;" data-delay="1.2">
-            
-        </p>
-        <a href="#portfolio" class="btn anim-hidden" data-delay="1.4">PORTFOLIONING KO'RISH</a>
-    </section>
-
-    <section id="stats" style="min-height: 40vh; padding: 80px 8vw; background-color: #0d0d0d;">
-        <div class="stats-block anim-hidden" style="display: flex; justify-content: space-around; width: 100%; max-width: 1200px; text-align: center;">
-            <div class="stat-item anim-hidden" data-delay="0.1">
-                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">0+</p>
-                <p style="font-size: 1rem; color: #aaa;">YAKUNLANGAN LOYIHALAR</p>
-            </div>
-            <div class="stat-item anim-hidden" data-delay="0.2">
-                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">1080p</p>
-                <p style="font-size: 1rem; color: #aaa;">MAKSIMAL SIFAT (Montajda)</p>
-            </div>
-            <div class="stat-item anim-hidden" data-delay="0.3">
-                <p style="font-size: 3.5rem; font-weight: 900; color: var(--accent-color); font-family: 'Space Mono', monospace;">100%</p>
-                <p style="font-size: 1rem; color: #aaa;">MOBIL/CINEMA YONDASHUV</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio">
-        <h2 class="anim-hidden">TANLANGAN LOYIHALAR</h2>
-        <div class="portfolio-grid">
-            
-            <a href="#" class="project-card anim-hidden" data-delay="0.1" style="text-decoration: none; overflow: hidden; position: relative; border: 2px solid rgba(0, 255, 153, 0.1);">
-                <img src="https://via.placeholder.com/700x500/000000?text=BRANDING+VIDEO" alt="Reklama" style="width: 100%; display: block; transition: transform 0.6s ease-out;" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
-                <div class="project-info" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); padding: 25px; text-align: left;">
-                    <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px;">Brend Loyihalari</h3>
-                    <p style="font-family: 'Space Mono', monospace; color: #aaaaaa;">Dinamik post-produksiya.</p>
+    <!-- Asosiy Kontent -->
+    <main id="main-content" class="hidden">
+        <!-- Navigation Bar -->
+        <nav class="navbar glass">
+            <div class="nav-container">
+                <a href="#" class="logo">YMT<span>HUB</span></a>
+                <ul class="nav-menu">
+                    <li><a href="#home">Bosh Sahifa</a></li>
+                    <li><a href="#services">Xizmatlar</a></li>
+                    <li><a href="#about">Biz Haqimizda</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Buyurtma</a></li>
+                    <li><a href="https://yordamchi-mk.vercel.app" target="_blank" class="nav-highlight"><i class="fas fa-graduation-cap"></i> Yordamchi Maktab</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
-            </a>
-            
-            <a href="#" class="project-card anim-hidden" data-delay="0.2" style="text-decoration: none; overflow: hidden; position: relative; border: 2px solid rgba(0, 255, 153, 0.1);">
-                <img src="https://via.placeholder.com/700x500/000000?text=MUSIC+VIDEO" alt="Art Klip" style="width: 100%; display: block; transition: transform 0.6s ease-out;" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
-                <div class="project-info" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); padding: 25px; text-align: left;">
-                    <h3 style="font-size: 1.8rem; color: var(--accent-color); margin-bottom: 5px;">Musiqiy Kadrlar</h3>
-                    <p style="font-family: 'Space Mono', monospace; color: #aaaaaa;">Badiiy yechimlar va rang.</p>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <video autoplay muted loop id="bg-video">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-geometric-abstract-background-1560-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-pop">Kreativlik va <span>Professionalizm</span> Uchrashuvi</h1>
+                    <p class="hero-subtitle">Biznesingiz uchun grafik dizayndan tortib to'liq raqamli echimgacha. Yuqori sifat, tezkorlik va ishonchli xizmat.</p>
+                    <div class="cta-buttons">
+                        <a href="#services" class="btn btn-primary">Xizmatlarni Ko'rish</a>
+                        <a href="#contact" class="btn btn-secondary animate-pulse">Hoziroq Buyurtma Bering</a>
+                    </div>
                 </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="xizmatlar" style="background-color: #0d0d0d;">
-        <h2 class="anim-hidden">XIZMATLAR VA VIZUAL STRATEGIYA</h2>
-        <div class="service-grid anim-hidden" style="display: flex; gap: 40px; max-width: 1200px; width: 100%; justify-content: center;" data-delay="0.2">
-            
-            <div class="service-item anim-hidden" style="flex: 1; border: 2px solid var(--accent-color); padding: 40px 30px; border-radius: 10px; transition: all 0.4s; cursor: default;" onmouseenter="this.style.backgroundColor='#1a1a1a'" onmouseleave="this.style.backgroundColor='transparent'" data-delay="0.3">
-                <i class="fas fa-video" style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;"></i>
-                <h3 style="color: var(--light-text); margin-bottom: 10px; font-family: 'Space Mono', monospace;">FULL PRODUCTION</h3>
-                <p style="color: #aaaaaa;">G'oyani vizual asarga aylantirish.</p>
             </div>
+        </section>
 
-            <div class="service-item anim-hidden" style="flex: 1; border: 2px solid var(--accent-color); padding: 40px 30px; border-radius: 10px; transition: all 0.4s; cursor: default;" onmouseenter="this.style.backgroundColor='#1a1a1a'" onmouseleave="this.style.backgroundColor='transparent'" data-delay="0.4">
-                <i class="fas fa-cut" style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;"></i>
-                <h3 style="color: var(--light-text); margin-bottom: 10px; font-family: 'Space Mono', monospace;">POST-PRODUCTION</h3>
-                <p style="color: #aaaaaa;">Professional montaj va rang berish ($DaVinci$ sathi).</p>
+        <!-- Xizmatlar Bo'limi -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Bizning <span>Premium Xizmatlar</span></h2>
+                <p class="section-subtitle">Har qanday loyiha uchun to'liq qamrovli echimlar</p>
+                <div class="services-grid">
+                    <!-- Xizmat kartasi 1 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Grafik Dizayn</h3>
+                        <p>Logotiplar, vizitkalar, brending, reklama materiallari.</p>
+                    </div>
+                    <!-- Xizmat kartasi 2 (HTML shaklida 8 ta kartani qo'shing) -->
+                    <!-- ... -->
+                    <!-- Xizmat kartasi 9 -->
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Kompyuter Savodxonligi</h3>
+                        <p>Boshlang'ich va ilg'or darajada shaxsiy o'qitish.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about">
-        <h2 class="anim-hidden">FILOSOFIYA</h2>
-        <div class="anim-hidden" data-delay="0.2" style="max-width: 900px;">
-             <p style="font-size: 1.4rem; line-height: 1.8; margin-bottom: 40px; color: var(--light-text);">
-                Men mobil videografiyada **minimalizm** va **maksimal effekt** tamoyillariga amal qilaman. Men uchun telefon — bu shunchaki vosita, ammo natija — bu **kino standartlari**ga mos keladigan yuqori sinf kontent. Meni tanlagan mijozlar texnologiyaga emas, balki ijodiy yechimga sarmoya kiritadi.
-             </p>
-             <p style="font-family: 'Space Mono', monospace; color: var(--accent-color); font-size: 1.1rem;">
-                 // VISION & EXECUTION
-             </p>
-        </div>
-    </section>
+        <!-- Yordamchi Maktab Bo'limi -->
+        <section class="section accent-section">
+            <div class="container">
+                <h2 class="section-title">Hamkor Ta'lim Platformasi</h2>
+                <div class="partner-container">
+                    <div class="partner-info">
+                        <h3>Yordamchi Maktab</h3>
+                        <p>Bizning ta'lim hamkorimiz. Fanlar bo'yicha testlar, o'yinlar va foydali materiallar to'plami.</p>
+                        <a href="https://yordamchi-mk.vercel.app" target="_blank" class="btn btn-outline">
+                            <i class="fas fa-external-link-alt"></i> Platformaga O'tish
+                        </a>
+                    </div>
+                    <div class="partner-preview">
+                        <!-- Platformaning vizual ko'rinishi yoki skrinshoti -->
+                        <div class="preview-screen">
+                            <div class="preview-header">
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="preview-content">
+                                <h4>Yordamchi Maktab</h4>
+                                <p>Bilim Makoni. Yangi Imkoniyatlar.</p>
+                                <div class="preview-features">
+                                    <span><i class="fas fa-robot"></i> Ustoz AI</span>
+                                    <span><i class="fas fa-gamepad"></i> O'yinlar</span>
+                                    <span><i class="fas fa-book"></i> Kutubxona</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="contact" style="min-height: 50vh; background-color: #0d0d0d;">
-        <h2 class="anim-hidden">KEYINGI LOYIHA</h2>
-        
-        <div class="anim-hidden" data-delay="0.2">
-            <p style="margin-bottom: 40px; font-size: 1.2rem;">
-                Keling, loyihangizni birgalikda muhokama qilaylik.
-            </p>
-            
-            <a href="mailto:shohjahon@example.com" class="btn" style="background: none; border: 2px solid var(--accent-color); color: var(--accent-color); margin-right: 30px;">
-                <i class="fas fa-envelope"></i> E-POCHTA
-            </a>
+        <!-- Buyurtma Formasi -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Xizmatga <span>Buyurtma Bering</span></h2>
+                <p class="section-subtitle">Murojaatingizni qoldiring, biz 24 soat ichida aloqaga chiqamiz</p>
+                <div class="form-container glass">
+                    <form id="order-form">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Ismingiz *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Telefon Raqamingiz *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service"><i class="fas fa-concierge-bell"></i> Qiziqqan Xizmat</label>
+                            <select id="service" name="service">
+                                <option value="">Tanlang...</option>
+                                <option value="grafik_dizayn">Grafik Dizayn</option>
+                                <option value="veb_sayt">Veb-sayt yaratish</option>
+                                <!-- Boshqa xizmatlar -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment-dots"></i> Xabar *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i> Telegramga Yuborish
+                        </button>
+                        <p class="form-note">Xabaringiz to'g'ridan-to'g'ri administratorning Telegram hisobiga yuboriladi.</p>
+                    </form>
+                    <div class="form-success hidden" id="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Buyurtmangiz Qabul Qilindi!</h3>
+                        <p>Tez orada siz bilan telefon orqali bog'lanamiz. Rahmat!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <a href="" class="btn" style="background: none; border: 2px solid #55acee; color: #55acee;">
-                <i class="fab fa-telegram-plane"></i> TELEGRAM
-            </a>
-        </div>
-    </section>
-    
-    <footer style="padding: 30px; text-align: center; font-size: 0.8rem; color: #444; background-color: var(--dark-bg);">
-        <p>&copy; 2025 SHOHJAHON MAHKAMOV. MOBIL CINEMA.</p>
-    </footer>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <h3>YMT<span>HUB</span></h3>
+                        <p>Professional xizmatlar va ishonchli yechimlar markazi.</p>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Aloqa</h4>
+                        <p><i class="fas fa-paper-plane"></i> Telegram: @ymthub_admin</p>
+                        <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 YMT HUB. Barcha huquqlar himoyalangan.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cursorFollower = document.getElementById('cursor-follower');
-            const interactiveElements = document.querySelectorAll('a, button, .project-card, .service-item, nav a, .menu-toggle');
-            const animatables = document.querySelectorAll('.anim-hidden');
-            const heroTitleLines = document.querySelectorAll('#hero-title .text-line');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuOpen = document.getElementById('menu-open');
-            const menuClose = document.getElementById('menu-close');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-
-            // --- 1. Mobil Menyu Boshqaruvi ---
-            menuOpen.addEventListener('click', () => {
-                mobileMenu.classList.add('open');
-            });
-
-            menuClose.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
+        // DOM to'liq yuklanganida ishga tushadi
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. KIRISH ANIMATSIYASI
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('main-content');
+    const progressBar = document.querySelector('.loader-progress');
+    
+    // Animatsiyani 3 soniya davom ettirish
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            mainContent.classList.remove('hidden');
+            // Kontent ko'rinishi uchun qo'shimcha animatsiya
+            mainContent.style.animation = 'fadeIn 1s ease';
+        }, 800);
+    }, 3000);
+    
+    // 2. HARAKATLANUVCHI MATN (rotating text)
+    const TxtRotate = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+    
+    TxtRotate.prototype.tick = function() {
+        const i = this.loopNum % this.toRotate.length;
+        const fullTxt = this.toRotate[i];
+        
+        if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+        
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+        
+        let delta = 200 - Math.random() * 100;
+        
+        if (this.isDeleting) { delta /= 2; }
+        
+        if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+        }
+        
+        setTimeout(() => { this.tick(); }, delta);
+    };
+    
+    // Harakatlanuvchi matnni faollashtirish
+    const elements = document.getElementsByClassName('txt-rotate');
+    for (let i=0; i<elements.length; i++) {
+        const toRotate = elements[i].getAttribute('data-rotate');
+        const period = elements[i].getAttribute('data-period');
+        if (toRotate) {
+            new TxtRotate(elements[i], JSON.parse(toRotate), period);
+        }
+    }
+    
+    // 3. MOBIL NAVIGATSIYA MENYUSI
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+    
+    // Menyu ochiq bo'lsa, sahifaning boshqa qismiga bosilganda yopish
+    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
+    
+    // 4. NAVBARNI AYLANISHDA O'ZGARTIRISH
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.style.background = 'rgba(18, 24, 38, 0.9)';
+            navbar.style.top = '0';
+            navbar.style.width = '100%';
+            navbar.style.borderRadius = '0';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.08)';
+            navbar.style.top = '20px';
+            navbar.style.width = '90%';
+            navbar.style.borderRadius = '20px';
+        }
+    });
+    
+    // 5. TELEGRAM-BOTGA XABAR YUBORISH FUNKSIYASI
+    // Telegram Bot Token va Chat ID (o'zgartiring)
+    const TELEGRAM_BOT_TOKEN = '8055090268:AAHtu9cy9lnZw_GFZqo8mc860Bj9G3H7vOU'; // O'z bot tokeningizni qo'ying
+    const TELEGRAM_CHAT_ID = '8136720315'; // O'z chat ID'ingizni qo'ying
+    
+    async function sendToTelegram(formData) {
+        const message = `📥 YMT HUB dan yangi buyurtma!\n\n` +
+                       `👤 Ism: ${formData.name}\n` +
+                       `📞 Telefon: ${formData.phone}\n` +
+                       `🎯 Xizmat: ${formData.service}\n` +
+                       `✉️ Xabar: ${formData.message}\n\n` +
+                       `⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+        
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
             });
             
-            // Mobil menyudagi linkni bosganda yopish
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                });
-            });
-
-
-            // --- 2. Kursor Harakati Logikasi (Mobil/Desktop farqi bilan) ---
-            if (window.innerWidth > 900) {
-                document.addEventListener('mousemove', (e) => {
-                    cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-                });
-
-                interactiveElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursorFollower.classList.add('cursor-active');
-                    });
-                    
-                    el.addEventListener('mouseleave', () => {
-                        cursorFollower.classList.remove('cursor-active');
-                    });
-                });
-            } else {
-                 // Mobil qurilmalarda kursor effektini o'chirish
-                if (cursorFollower) cursorFollower.style.display = 'none';
-                document.body.style.cursor = 'auto';
-            }
+            return response.ok;
+        } catch (error) {
+            console.error('Telegram xatosi:', error);
+            return false;
+        }
+    }
+    
+    // 6. BUYURTMA FORMASINI QAYTA ISHLASH
+    const orderForm = document.getElementById('order-form');
+    const successMessage = document.getElementById('success-message');
+    
+    orderForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Forma ma'lumotlarini yig'ish
+        const formData = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            service: document.getElementById('service').value || 'Ko'rsatilmagan',
+            message: document.getElementById('message').value
+        };
+        
+        // Yuborish tugmasini bloklash va yuklanish ko'rsatgichini ko'rsatish
+        const submitBtn = orderForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+        submitBtn.disabled = true;
+        
+        // Telegramga yuborish
+        const isSent = await sendToTelegram(formData);
+        
+        if (isSent) {
+            // Muvaffaqiyat xabarini ko'rsatish
+            orderForm.style.display = 'none';
+            successMessage.classList.remove('hidden');
             
-            // --- 3. Scroll Paytida Animatsiyalar Logikasi ---
-            const checkInView = () => {
-                const triggerPoint = window.innerHeight * 0.85;
-
-                animatables.forEach(el => {
-                    if (el.classList.contains('anim-visible')) return; 
-
-                    const elTop = el.getBoundingClientRect().top;
-                    const delay = parseFloat(el.getAttribute('data-delay')) || 0; 
-
-                    if (elTop < triggerPoint) {
-                        setTimeout(() => {
-                            el.classList.add('anim-visible');
-                        }, delay * 1000);
-                    }
-                });
-            };
-
-            // --- 4. Bosh Sahifa Matn Animatsiyasi (Super Kirish) ---
-            const animateHeroTitle = () => {
-                let globalDelay = 0;
-                
-                heroTitleLines.forEach(line => {
-                    line.classList.add('animate');
-                    line.style.transitionDelay = `${globalDelay}s`;
-                    globalDelay += 0.3; 
-                });
-            };
-
-            // Animatsiyalarni boshlash
-            window.addEventListener('scroll', checkInView);
+            // Formani tozalash
+            orderForm.reset();
             
+            // 5 soniyadan so'ng formani qayta ko'rsatish
             setTimeout(() => {
-                animateHeroTitle();
-                checkInView(); 
-            }, 500); 
+                successMessage.classList.add('hidden');
+                orderForm.style.display = 'block';
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 5000);
+        } else {
+            // Xato xabarini ko'rsatish
+            alert('Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko\'ring yoki to\'g\'ridan-to\'g\'ri Telegram orqali bog\'laning.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+    
+    // 7. XIZMAT KARTALARI UCHUN PARALLAKS EFFEKT
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = (x - centerX) / 25;
+            const rotateX = (centerY - y) / 25;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
         });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+    
+    // 8. SAHIFA O'ZGARISHIDA SILLIQ SKROLL
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            if(this.getAttribute('href') === '#') return;
+            
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if(targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // CSS ga qo'shimcha animatsiyalar qo'shish
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .service-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    `;
+    document.head.appendChild(style);
+});
     </script>
 </body>
 </html>
