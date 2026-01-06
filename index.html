@@ -3,840 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YMT HUB | Professional Xizmatlar Markazi</title>
+    <title>YMT HUB | Pure Liquid Glass</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-    /* Asosiy sozlamalar */
-:root {
-    --primary: #6a11cb;
-    --secondary: #2575fc;
-    --accent: #ff8a00;
-    --dark: #121826;
-    --light: #f8f9fa;
-    --glass: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.1);
-}
+        /* SCSS Logic implemented in CSS Variables */
+        :root {
+            --bg-color: #030305;
+            --glass-bg: rgba(255, 255, 255, 0.015);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --liquid-accent: #0076FF;
+            --purple-accent: #bf5af2;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: var(--light);
-    overflow-x: hidden;
-    min-height: 100vh;
-}
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-/* Kirish Animatsiyasi */
-.loader-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(45deg, var(--dark), #1a1a2e);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease-out;
-}
+        /* --- 1. REAL LIQUID BACKGROUND (SCSS Loop like logic) --- */
+        .liquid-container {
+            position: fixed; width: 100vw; height: 100vh;
+            top: 0; left: 0; z-index: -1;
+            filter: blur(60px) contrast(1.2);
+            background: radial-gradient(circle at 50% 50%, #111, #000);
+        }
 
-.logo-loader h1 {
-    font-size: 5rem;
-    font-weight: 800;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 1rem;
-}
+        .blob {
+            position: absolute;
+            width: 50vmax; height: 50vmax;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            animation: move 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+        }
 
-.logo-loader span { color: var(--accent); }
-.tagline {
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
-}
+        .blob-1 { background: var(--liquid-accent); top: -10%; left: -10%; opacity: 0.6; }
+        .blob-2 { background: var(--purple-accent); bottom: -10%; right: -10%; animation-delay: -5s; opacity: 0.4; }
+        .blob-3 { background: #ff2d55; top: 40%; left: 30%; animation-duration: 15s; opacity: 0.3; }
 
-.txt-rotate { color: var(--accent); font-weight: 600; }
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1) rotate(0deg); }
+            to { transform: translate(20vw, 30vh) scale(1.4) rotate(360deg); }
+        }
 
-.loader-bar {
-    width: 300px; height: 8px;
-    background: var(--glass);
-    border-radius: 10px;
-    overflow: hidden;
-}
+        /* --- 2. THE LIQUID GLASS UI --- */
+        nav {
+            position: fixed; top: 15px; width: 92%; left: 4%;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 0.5px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 12px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
 
-.loader-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 10px;
-    animation: loading 3s ease-in-out forwards;
-}
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 0 20px; text-align: center;
+        }
 
-@keyframes loading {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 7rem);
+            font-weight: 800; line-height: 0.9;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* Asosiy kontent */
-.hidden { display: none; }
+        /* --- 3. MOBILE OPTIMIZED GLASS CARDS --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px; padding: 0 4% 100px;
+        }
 
-/* Glassmorphism effekti */
-.glass {
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) brightness(1.1);
+            -webkit-backdrop-filter: blur(40px) brightness(1.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+        }
 
-/* Navigation Bar */
-.navbar {
-    position: fixed;
-    top: 20px; left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1200px;
-    z-index: 1000;
-    padding: 1.2rem 2rem;
-    transition: all 0.4s ease;
-}
+        /* Suyuq oyna yaltirashi */
+        .glass-card::after {
+            content: ''; position: absolute; top: -100%; left: -100%;
+            width: 300%; height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 50%);
+            transition: 0.8s;
+        }
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .glass-card:active, .glass-card:hover {
+            transform: scale(0.98);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+        }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: white;
-    text-decoration: none;
-}
+        /* --- 4. UNIVERSAL TA'LIM SECTION --- */
+        .edu-section {
+            margin: 60px 4%;
+            padding: 40px 24px;
+            background: linear-gradient(145deg, rgba(0, 118, 255, 0.05), rgba(0,0,0,0));
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
 
-.logo span {
-    color: var(--accent);
-}
+        .premium-btn {
+            background: #fff; color: #000;
+            padding: 18px 40px; border-radius: 100px;
+            font-weight: 700; text-decoration: none;
+            display: inline-block; margin-top: 24px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            transition: 0.3s ease;
+        }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
+        /* --- 5. CONTACT FORM (MOBILE FRIENDLY) --- */
+        .contact-form {
+            margin: 40px 4%; padding: 32px;
+            background: rgba(255,255,255,0.01);
+            border-radius: 40px; border: 1px solid var(--glass-border);
+            backdrop-filter: blur(50px);
+        }
 
-.nav-menu a {
-    color: var(--light);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-    padding: 0.5rem 0;
-}
+        input, textarea {
+            width: 100%; padding: 20px; margin-bottom: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px; color: #fff;
+            font-size: 16px; outline: none;
+        }
 
-.nav-menu a:hover { color: var(--accent); }
-.nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 2px;
-    background: var(--accent);
-    transition: width 0.3s;
-}
-
-.nav-menu a:hover::after { width: 100%; }
-
-.nav-highlight {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    padding: 0.6rem 1.5rem !important;
-    border-radius: 50px !important;
-    font-weight: 600 !important;
-}
-
-.hamburger { display: none; cursor: pointer; }
-.bar {
-    display: block;
-    width: 25px; height: 3px;
-    margin: 5px auto;
-    background-color: white;
-    transition: all 0.3s ease;
-}
-
-/* Hero Bo'limi */
-.hero {
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 80px;
-}
-
-#bg-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -2;
-    opacity: 0.4;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle at center, transparent 30%, rgba(10, 10, 30, 0.9) 70%);
-    z-index: -1;
-}
-
-.hero-content {
-    text-align: center;
-    max-width: 900px;
-    padding: 2rem;
-    z-index: 1;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-}
-
-.hero-title span {
-    background: linear-gradient(45deg, var(--accent), #ffd700);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.animate-pop {
-    animation: popIn 1s ease-out 0.5s both;
-}
-
-@keyframes popIn {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-.hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
-    line-height: 1.6;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-}
-
-.btn-outline {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-.btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 138, 0, 0.6); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 138, 0, 0); }
-}
-
-/* Xizmatlar kartalari */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.service-card {
-    padding: 2.5rem 2rem;
-    text-align: center;
-    border-radius: 20px;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-    border-radius: 20px;
-    z-index: -1;
-}
-
-.service-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.service-icon {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Forma dizayni */
-.form-container {
-    max-width: 700px;
-    margin: 3rem auto 0;
-    padding: 3rem;
-}
-
-.form-group {
-    margin-bottom: 1.8rem;
-}
-
-.form-group label {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 0.7rem;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid var(--glass-border);
-    color: white;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.2);
-}
-
-.btn-block { width: 100%; }
-
-.form-note {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-.form-success {
-    text-align: center;
-    padding: 3rem;
-}
-
-.form-success i {
-    font-size: 5rem;
-    color: #4CAF50;
-    margin-bottom: 1.5rem;
-}
-
-/* Mobil moslashuv */
-@media (max-width: 992px) {
-    .hero-title { font-size: 2.8rem; }
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 90px;
-        flex-direction: column;
-        background: rgba(18, 24, 38, 0.95);
-        backdrop-filter: blur(10px);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        padding: 2rem 0;
-        gap: 0;
-    }
-    .nav-menu.active {
-        left: 0;
-        border-top: 1px solid var(--glass-border);
-    }
-    .nav-menu li { margin: 1.2rem 0; }
-    .hamburger {
-        display: block;
-        z-index: 1001;
-    }
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    .cta-buttons { flex-direction: column; align-items: center; }
-    .btn { width: 100%; max-width: 300px; }
-    .services-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-    .form-container { padding: 2rem; }
-}
-
-@media (max-width: 576px) {
-    .hero-title { font-size: 2.2rem; }
-    .hero-subtitle { font-size: 1.1rem; }
-    .logo-loader h1 { font-size: 3.5rem; }
-    .section-title { font-size: 2rem; }
-}
+        /* --- SCSS MASK FOR LIQUID FEEL --- */
+        .liquid-mask {
+            mask-image: radial-gradient(circle, #000 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle, #000 60%, transparent 100%);
+        }
     </style>
 </head>
 <body>
-    <!-- Kirish Animatsiyasi Sahifasi -->
-    <div id="loader" class="loader-container">
-        <div class="loader-content">
-            <div class="logo-loader">
-                <h1 class="animating-logo">YMT<span>HUB</span></h1>
-                <p class="tagline">Professional <span class="txt-rotate" data-period="2000" data-rotate='[ "Xizmatlar.", "Yechimlar.", "Natijalar.", "Ishonch." ]'></span></p>
-            </div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
+
+    <div class="liquid-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav>
+        <div style="font-family: 'Syne'; font-size: 1.2rem; font-weight: 800; letter-spacing: -1px;">YMT HUB</div>
+        <a href="#order" style="color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600;">ALOQA</a>
+    </nav>
+
+    <section class="hero" data-aos="zoom-out">
+        <h1>LIQUID<br>SYSTEM</h1>
+        <p style="opacity: 0.5; margin-top: 15px; letter-spacing: 4px; font-weight: 300;">MODERN SOLUTION</p>
+    </section>
+
+    <section class="edu-section" data-aos="fade-up">
+        <h2 style="font-family: 'Syne'; font-size: 1.8rem;">YMT HUB Ta'lim</h2>
+        <p style="opacity: 0.7; margin-top: 12px; font-size: 0.95rem;">
+            Bu yerda nafaqat IT, balki biznes, psixologiya, til o'rganish va professional ofis ishlari bo'yicha eng sara bilimlar jamlangan.
+        </p>
+        <a href="https://yordamchi-mk.vercel.app" class="premium-btn">PLATFORMAGA O'TISH</a>
+    </section>
+
+    <div class="services-grid">
+        <div class="glass-card" data-aos="fade-up">
+            <h3 style="font-family: 'Syne'; margin-bottom: 10px;">Grafik Dizayn</h3>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Logotipdan tortib to to'liq brendingacha. Suyuq dizayn uslubida.</p>
+        </div>
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+            <h3 style="font-family: 'Syne'; margin-bottom: 10px;">Web Saytlar</h3>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Haqiqiy shisha va suyuqlik effektlari bilan yaratilgan futuristik veb-saytlar.</p>
+        </div>
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+            <h3 style="font-family: 'Syne'; margin-bottom: 10px;">Mobilografiya</h3>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Video montaj va Reels uchun professional kontent tayyorlash.</p>
+        </div>
+        <div class="glass-card" data-aos="fade-up">
+            <h3 style="font-family: 'Syne'; margin-bottom: 10px;">Office & Slayt</h3>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Word, Excel va PowerPoint bo'yicha murakkab hujjatlar va taqdimotlar.</p>
+        </div>
+        <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+            <h3 style="font-family: 'Syne'; margin-bottom: 10px;">Individual Ta'lim</h3>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Kompyuterni noldan professional darajagacha o'rgatuvchi darslar.</p>
         </div>
     </div>
 
-    <!-- Asosiy Kontent -->
-    <main id="main-content" class="hidden">
-        <!-- Navigation Bar -->
-        <nav class="navbar glass">
-            <div class="nav-container">
-                <a href="#" class="logo">YMT<span>HUB</span></a>
-                <ul class="nav-menu">
-                    <li><a href="#home">Bosh Sahifa</a></li>
-                    <li><a href="#services">Xizmatlar</a></li>
-                    <li><a href="#about">Biz Haqimizda</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Buyurtma</a></li>
-                    <li><a href="https://yordamchi-mk.vercel.app" target="_blank" class="nav-highlight"><i class="fas fa-graduation-cap"></i> Yordamchi Maktab</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
+    <section class="contact-form" id="order" data-aos="fade-up">
+        <h2 style="font-family: 'Syne'; text-align: center; margin-bottom: 24px;">Buyurtma berish</h2>
+        <form id="tgForm">
+            <input type="text" id="name" placeholder="Ismingiz" required>
+            <input type="tel" id="phone" placeholder="Telefoningiz" required>
+            <textarea id="message" rows="4" placeholder="Xizmatingizni yozing..." required></textarea>
+            <button type="submit" class="premium-btn" style="width: 100%; border: none;">YUBORISH</button>
+        </form>
+    </section>
 
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <video autoplay muted loop id="bg-video">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-geometric-abstract-background-1560-large.mp4" type="video/mp4">
-            </video>
-            <div class="hero-overlay">
-                <div class="hero-content">
-                    <h1 class="hero-title animate-pop">Kreativlik va <span>Professionalizm</span> Uchrashuvi</h1>
-                    <p class="hero-subtitle">Biznesingiz uchun grafik dizayndan tortib to'liq raqamli echimgacha. Yuqori sifat, tezkorlik va ishonchli xizmat.</p>
-                    <div class="cta-buttons">
-                        <a href="#services" class="btn btn-primary">Xizmatlarni Ko'rish</a>
-                        <a href="#contact" class="btn btn-secondary animate-pulse">Hoziroq Buyurtma Bering</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <footer style="padding: 40px; text-align: center; opacity: 0.3; font-size: 0.7rem;">
+        © 2026 YMT HUB GLOBAL. BU HAQIQIY SHISHA TAJRIBASI.
+    </footer>
 
-        <!-- Xizmatlar Bo'limi -->
-        <section id="services" class="section">
-            <div class="container">
-                <h2 class="section-title">Bizning <span>Premium Xizmatlar</span></h2>
-                <p class="section-subtitle">Har qanday loyiha uchun to'liq qamrovli echimlar</p>
-                <div class="services-grid">
-                    <!-- Xizmat kartasi 1 -->
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-palette"></i></div>
-                        <h3>Grafik Dizayn</h3>
-                        <p>Logotiplar, vizitkalar, brending, reklama materiallari.</p>
-                    </div>
-                    <!-- Xizmat kartasi 2 (HTML shaklida 8 ta kartani qo'shing) -->
-                    <!-- ... -->
-                    <!-- Xizmat kartasi 9 -->
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3>Kompyuter Savodxonligi</h3>
-                        <p>Boshlang'ich va ilg'or darajada shaxsiy o'qitish.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Yordamchi Maktab Bo'limi -->
-        <section class="section accent-section">
-            <div class="container">
-                <h2 class="section-title">Hamkor Ta'lim Platformasi</h2>
-                <div class="partner-container">
-                    <div class="partner-info">
-                        <h3>Yordamchi Maktab</h3>
-                        <p>Bizning ta'lim hamkorimiz. Fanlar bo'yicha testlar, o'yinlar va foydali materiallar to'plami.</p>
-                        <a href="https://yordamchi-mk.vercel.app" target="_blank" class="btn btn-outline">
-                            <i class="fas fa-external-link-alt"></i> Platformaga O'tish
-                        </a>
-                    </div>
-                    <div class="partner-preview">
-                        <!-- Platformaning vizual ko'rinishi yoki skrinshoti -->
-                        <div class="preview-screen">
-                            <div class="preview-header">
-                                <div class="preview-dots">
-                                    <span></span><span></span><span></span>
-                                </div>
-                            </div>
-                            <div class="preview-content">
-                                <h4>Yordamchi Maktab</h4>
-                                <p>Bilim Makoni. Yangi Imkoniyatlar.</p>
-                                <div class="preview-features">
-                                    <span><i class="fas fa-robot"></i> Ustoz AI</span>
-                                    <span><i class="fas fa-gamepad"></i> O'yinlar</span>
-                                    <span><i class="fas fa-book"></i> Kutubxona</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Buyurtma Formasi -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Xizmatga <span>Buyurtma Bering</span></h2>
-                <p class="section-subtitle">Murojaatingizni qoldiring, biz 24 soat ichida aloqaga chiqamiz</p>
-                <div class="form-container glass">
-                    <form id="order-form">
-                        <div class="form-group">
-                            <label for="name"><i class="fas fa-user"></i> Ismingiz *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone"><i class="fas fa-phone"></i> Telefon Raqamingiz *</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="service"><i class="fas fa-concierge-bell"></i> Qiziqqan Xizmat</label>
-                            <select id="service" name="service">
-                                <option value="">Tanlang...</option>
-                                <option value="grafik_dizayn">Grafik Dizayn</option>
-                                <option value="veb_sayt">Veb-sayt yaratish</option>
-                                <!-- Boshqa xizmatlar -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message"><i class="fas fa-comment-dots"></i> Xabar *</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fas fa-paper-plane"></i> Telegramga Yuborish
-                        </button>
-                        <p class="form-note">Xabaringiz to'g'ridan-to'g'ri administratorning Telegram hisobiga yuboriladi.</p>
-                    </form>
-                    <div class="form-success hidden" id="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        <h3>Buyurtmangiz Qabul Qilindi!</h3>
-                        <p>Tez orada siz bilan telefon orqali bog'lanamiz. Rahmat!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3>YMT<span>HUB</span></h3>
-                        <p>Professional xizmatlar va ishonchli yechimlar markazi.</p>
-                    </div>
-                    <div class="footer-contact">
-                        <h4>Aloqa</h4>
-                        <p><i class="fas fa-paper-plane"></i> Telegram: @ymthub_admin</p>
-                        <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 YMT HUB. Barcha huquqlar himoyalangan.</p>
-                </div>
-            </div>
-        </footer>
-    </main>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // DOM to'liq yuklanganida ishga tushadi
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. KIRISH ANIMATSIYASI
-    const loader = document.getElementById('loader');
-    const mainContent = document.getElementById('main-content');
-    const progressBar = document.querySelector('.loader-progress');
-    
-    // Animatsiyani 3 soniya davom ettirish
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-            mainContent.classList.remove('hidden');
-            // Kontent ko'rinishi uchun qo'shimcha animatsiya
-            mainContent.style.animation = 'fadeIn 1s ease';
-        }, 800);
-    }, 3000);
-    
-    // 2. HARAKATLANUVCHI MATN (rotating text)
-    const TxtRotate = function(el, toRotate, period) {
-        this.toRotate = toRotate;
-        this.el = el;
-        this.loopNum = 0;
-        this.period = parseInt(period, 10) || 2000;
-        this.txt = '';
-        this.tick();
-        this.isDeleting = false;
-    };
-    
-    TxtRotate.prototype.tick = function() {
-        const i = this.loopNum % this.toRotate.length;
-        const fullTxt = this.toRotate[i];
-        
-        if (this.isDeleting) {
-            this.txt = fullTxt.substring(0, this.txt.length - 1);
-        } else {
-            this.txt = fullTxt.substring(0, this.txt.length + 1);
-        }
-        
-        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
-        
-        let delta = 200 - Math.random() * 100;
-        
-        if (this.isDeleting) { delta /= 2; }
-        
-        if (!this.isDeleting && this.txt === fullTxt) {
-            delta = this.period;
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.txt === '') {
-            this.isDeleting = false;
-            this.loopNum++;
-            delta = 500;
-        }
-        
-        setTimeout(() => { this.tick(); }, delta);
-    };
-    
-    // Harakatlanuvchi matnni faollashtirish
-    const elements = document.getElementsByClassName('txt-rotate');
-    for (let i=0; i<elements.length; i++) {
-        const toRotate = elements[i].getAttribute('data-rotate');
-        const period = elements[i].getAttribute('data-period');
-        if (toRotate) {
-            new TxtRotate(elements[i], JSON.parse(toRotate), period);
-        }
-    }
-    
-    // 3. MOBIL NAVIGATSIYA MENYUSI
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // Menyu ochiq bo'lsa, sahifaning boshqa qismiga bosilganda yopish
-    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    }));
-    
-    // 4. NAVBARNI AYLANISHDA O'ZGARTIRISH
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(18, 24, 38, 0.9)';
-            navbar.style.top = '0';
-            navbar.style.width = '100%';
-            navbar.style.borderRadius = '0';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.08)';
-            navbar.style.top = '20px';
-            navbar.style.width = '90%';
-            navbar.style.borderRadius = '20px';
-        }
-    });
-    
-    // 5. TELEGRAM-BOTGA XABAR YUBORISH FUNKSIYASI
-    // Telegram Bot Token va Chat ID (o'zgartiring)
-    const TELEGRAM_BOT_TOKEN = '8055090268:AAHtu9cy9lnZw_GFZqo8mc860Bj9G3H7vOU'; // O'z bot tokeningizni qo'ying
-    const TELEGRAM_CHAT_ID = '8136720315'; // O'z chat ID'ingizni qo'ying
-    
-    async function sendToTelegram(formData) {
-        const message = `📥 YMT HUB dan yangi buyurtma!\n\n` +
-                       `👤 Ism: ${formData.name}\n` +
-                       `📞 Telefon: ${formData.phone}\n` +
-                       `🎯 Xizmat: ${formData.service}\n` +
-                       `✉️ Xabar: ${formData.message}\n\n` +
-                       `⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
-        
-        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-        
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            });
-            
-            return response.ok;
-        } catch (error) {
-            console.error('Telegram xatosi:', error);
-            return false;
-        }
-    }
-    
-    // 6. BUYURTMA FORMASINI QAYTA ISHLASH
-    const orderForm = document.getElementById('order-form');
-    const successMessage = document.getElementById('success-message');
-    
-    orderForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Forma ma'lumotlarini yig'ish
-        const formData = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            service: document.getElementById('service').value || 'Ko'rsatilmagan',
-            message: document.getElementById('message').value
-        };
-        
-        // Yuborish tugmasini bloklash va yuklanish ko'rsatgichini ko'rsatish
-        const submitBtn = orderForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
-        submitBtn.disabled = true;
-        
-        // Telegramga yuborish
-        const isSent = await sendToTelegram(formData);
-        
-        if (isSent) {
-            // Muvaffaqiyat xabarini ko'rsatish
-            orderForm.style.display = 'none';
-            successMessage.classList.remove('hidden');
-            
-            // Formani tozalash
-            orderForm.reset();
-            
-            // 5 soniyadan so'ng formani qayta ko'rsatish
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-                orderForm.style.display = 'block';
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 5000);
-        } else {
-            // Xato xabarini ko'rsatish
-            alert('Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko\'ring yoki to\'g\'ridan-to\'g\'ri Telegram orqali bog\'laning.');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        }
-    });
-    
-    // 7. XIZMAT KARTALARI UCHUN PARALLAKS EFFEKT
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateY = (x - centerX) / 25;
-            const rotateX = (centerY - y) / 25;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        });
-    });
-    
-    // 8. SAHIFA O'ZGARISHIDA SILLIQ SKROLL
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            if(this.getAttribute('href') === '#') return;
-            
+        AOS.init({ duration: 1000, once: true });
+
+        // Telegram Bot integration
+        const TOKEN = "8055090268:AAHtu9cy9lnZw_GFZqo8mc860Bj9G3H7vOU";
+        const CHAT_ID = "8136720315";
+
+        document.getElementById('tgForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            const text = `🌊 YANGI SO'ROV:\n\n👤: ${document.getElementById('name').value}\n📞: ${document.getElementById('phone').value}\n📝: ${document.getElementById('message').value}`;
             
-            if(targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 100,
-                    behavior: 'smooth'
+            try {
+                await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({chat_id: CHAT_ID, text: text})
                 });
+                alert("Xabaringiz shisha ortidan yetib bordi!");
+                document.getElementById('tgForm').reset();
+            } catch (err) {
+                alert("Xatolik yuz berdi.");
             }
         });
-    });
-    
-    // CSS ga qo'shimcha animatsiyalar qo'shish
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .service-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
-    `;
-    document.head.appendChild(style);
-});
     </script>
 </body>
 </html>
