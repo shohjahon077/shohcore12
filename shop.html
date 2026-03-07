@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shohcore12 | Shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0a0e1a;
+            --bg-card: #151e32;
+            --bg-hover: #1e2a45;
+            --text: #f8fafc;
+            --text-sec: #94a3b8;
+            --border: #2d3748;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 85px;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(30px);
+            padding: 20px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .add-product-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: all 0.3s;
+        }
+
+        .add-product-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        /* SHOP CONTAINER */
+        .shop-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* SEARCH & FILTERS */
+        .shop-search {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sec);
+            font-size: 1.1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .category-filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-chip {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-sec);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .category-chip:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        .category-chip.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* SORT & RESULTS */
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+        }
+
+        .results-count span {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .sort-select {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg), 0 0 30px var(--primary-glow);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            background: var(--bg-hover);
+            overflow: hidden;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-favorite {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: var(--text-sec);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .product-favorite:hover {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .product-favorite.active {
+            color: var(--danger);
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin-bottom: 10px;
+        }
+
+        .product-price span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-sec);
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-sec);
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .product-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* PRODUCT DETAIL MODAL */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .product-modal.active {
+            display: flex;
+            animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            background: var(--bg-hover);
+        }
+
+        .modal-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .modal-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            font-size: 0.95rem;
+            color: var(--text-sec);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-info-item {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-info-label {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+            margin-bottom: 5px;
+        }
+
+        .modal-info-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .modal-seller {
+            background: var(--bg-hover);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .seller-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .seller-info {
+            flex: 1;
+        }
+
+        .seller-name {
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .seller-rating {
+            font-size: 0.8rem;
+            color: var(--warning);
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .modal-btn-primary:hover {
+            box-shadow: 0 6px 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .modal-btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .phone-reveal {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .phone-reveal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .phone-number {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            letter-spacing: 2px;
+        }
+
+        /* ADD PRODUCT MODAL */
+        .add-product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .add-product-modal.active {
+            display: flex;
+            animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .add-modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .add-modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .add-modal-icon {
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .add-modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .add-modal-desc {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            line-height: 1.6;
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 6px 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-sec);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .empty-title {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .empty-text {
+            font-size: 0.95rem;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(21, 30, 50, 0.98);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 500;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            color: var(--text-sec);
+            font-size: 0.75rem;
+            text-align: center;
+            text-decoration: none;
+            width: 20%;
+            transition: all 0.3s;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-item:hover::after {
+            width: 30px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-light);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+        }
+
+        .nav-item.active::after {
+            width: 40px;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-card {
+            animation: slideIn 0.4s ease backwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* STATUS MESSAGE */
+        .status-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            z-index: 3000;
+            display: none;
+            animation: statusSlideDown 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes statusSlideDown {
+            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .status-success {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+        }
+
+        .status-error {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">SHOH<span>CORE12</span></div>
+        <button class="add-product-btn" onclick="openAddProductModal()">
+            <i class="fas fa-plus"></i>
+            E'lon Qo'shish
+        </button>
+    </div>
+
+    <!-- SHOP CONTAINER -->
+    <div class="shop-container">
+        <!-- Search -->
+        <div class="shop-search">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="shopSearch" placeholder="Mahsulot qidirish..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-filters">
+            <button class="category-chip active" onclick="filterCategory('all')">
+                <i class="fas fa-th"></i> Barchasi
+            </button>
+            <button class="category-chip" onclick="filterCategory('electronics')">
+                <i class="fas fa-laptop"></i> Elektronika
+            </button>
+            <button class="category-chip" onclick="filterCategory('clothing')">
+                <i class="fas fa-tshirt"></i> Kiyim
+            </button>
+            <button class="category-chip" onclick="filterCategory('auto')">
+                <i class="fas fa-car"></i> Avto
+            </button>
+            <button class="category-chip" onclick="filterCategory('home')">
+                <i class="fas fa-home"></i> Uy-joy
+            </button>
+            <button class="category-chip" onclick="filterCategory('services')">
+                <i class="fas fa-tools"></i> Xizmatlar
+            </button>
+            <button class="category-chip" onclick="filterCategory('other')">
+                <i class="fas fa-box"></i> Boshqa
+            </button>
+        </div>
+
+        <!-- Shop Header -->
+        <div class="shop-header">
+            <div class="results-count" id="resultsCount">
+                <span>50</span> ta e'lon mavjud
+            </div>
+            <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+                <option value="newest">Yangi</option>
+                <option value="price-asc">Arzonroq</option>
+                <option value="price-desc">Qimmatroq</option>
+                <option value="popular">Ommabop</option>
+            </select>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-shopping-bag empty-icon"></i>
+            <div class="empty-title">Mahsulot topilmadi</div>
+            <div class="empty-text">Qidiruv so'zingizni o'zgartirib ko'ring</div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <button class="modal-close" onclick="closeProductModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-title" id="modalTitle">Mahsulot nomi</div>
+                <div class="modal-price" id="modalPrice">0 so'm</div>
+                <div class="modal-description" id="modalDescription">Tavsif</div>
+                
+                <div class="modal-info">
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">Holat</div>
+                        <div class="modal-info-value" id="modalCondition">Yangi</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">Joylashuv</div>
+                        <div class="modal-info-value" id="modalLocation">Toshkent</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">Kategoriya</div>
+                        <div class="modal-info-value" id="modalCategory">Elektronika</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">Ko'rishlar</div>
+                        <div class="modal-info-value" id="modalViews">0</div>
+                    </div>
+                </div>
+
+                <div class="modal-seller">
+                    <img src="" alt="" class="seller-avatar" id="sellerAvatar">
+                    <div class="seller-info">
+                        <div class="seller-name" id="sellerName">Sotuvchi</div>
+                        <div class="seller-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-sec); margin-left: 5px;">4.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-primary" onclick="revealPhone()">
+                        <i class="fas fa-phone-alt"></i>
+                        Raqamni Ko'rsatish
+                    </button>
+                    <div class="phone-reveal" id="phoneReveal">
+                        <div class="phone-number" id="phoneNumber">+998 90 123 45 67</div>
+                    </div>
+                    <button class="modal-btn modal-btn-secondary" onclick="contactSeller()">
+                        <i class="fas fa-comment"></i>
+                        Xabar Yozish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div class="add-product-modal" id="addProductModal">
+        <div class="add-modal-content">
+            <div class="add-modal-header">
+                <div class="add-modal-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="add-modal-title">Tavar Joylash</div>
+                <div class="add-modal-desc">
+                    Bizning shohcore12 ilovamizda har kuni 100lab tavar joylash takliflari tushadi, lekin biz hamma tavarlarni ham joylamaymiz. 
+                    Shuning uchun siz o'zingizni mahsulotingizni rasmini va ma'lumotini va narxini va telefon raqamingizni yuboring, 
+                    biz iloji boricha sizning tavaringizni joylashga harakat qilamiz!
+                </div>
+            </div>
+
+            <form id="addProductForm" onsubmit="submitProduct(event)">
+                <div class="form-group">
+                    <label class="form-label">Ismingiz</label>
+                    <input type="text" class="form-input" id="productName" placeholder="Ism familiyangiz" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Telefon Raqam</label>
+                    <input type="tel" class="form-input" id="productPhone" placeholder="+998 90 123 45 67" required>
+                    <div class="form-hint">Aloqa uchun ishlatiladi</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Manzil</label>
+                    <input type="text" class="form-input" id="productLocation" placeholder="Toshkent, Chilonzor" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Mahsulot Nomi</label>
+                    <input type="text" class="form-input" id="productTitle" placeholder="iPhone 14 Pro" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Narx (so'm)</label>
+                    <input type="number" class="form-input" id="productPrice" placeholder="5000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Kategoriya</label>
+                    <select class="form-select" id="productCategory" required>
+                        <option value="">Tanlang...</option>
+                        <option value="electronics">Elektronika</option>
+                        <option value="clothing">Kiyim</option>
+                        <option value="auto">Avto</option>
+                        <option value="home">Uy-joy</option>
+                        <option value="services">Xizmatlar</option>
+                        <option value="other">Boshqa</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tavsif</label>
+                    <textarea class="form-textarea" id="productDescription" placeholder="Mahsulot haqida to'liq ma'lumot..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Rasm (URL)</label>
+                    <input type="url" class="form-input" id="productImage" placeholder="https://example.com/image.jpg">
+                    <div class="form-hint">Rasm havolasini qo'ying yoki bo'sh qoldiring</div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    YUBORISH
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- STATUS MESSAGE -->
+    <div class="status-message" id="statusMsg"></div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Bosh Sahifa
+        </a>
+        <a href="qidiruv.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            Qidiruv
+        </a>
+        <a href="music.html" class="nav-item">
+            <i class="fas fa-music"></i>
+            Musiqa
+        </a>
+        <a href="shop.html" class="nav-item active">
+            <i class="fas fa-shopping-bag"></i>
+            Shop
+        </a>
+        <a href="ads.html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            Reklama
+        </a>
+    </div>
+
+    <script>
+        // ========================================
+        // 🛍️ PRODUCTS DATABASE (50 ITEMS)
+        // ========================================
+        const PRODUCTS = [
+            { id: 1, title: "iPhone 14 Pro Max", price: 12500000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=1", description: "Yangi iPhone 14 Pro Max, 256GB, Deep Purple rangi. Kafolat bilan.", seller: "Ali Valiyev", sellerAvatar: "https://i.pravatar.cc/150?u=3", phone: "+998 90 111 22 33", views: 1520, date: "2024-01-15", badge: "Top" },
+            { id: 2, title: "Samsung Galaxy S23", price: 9800000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=2", description: "Samsung Galaxy S23 Ultra, 512GB, Phantom Black.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 980, date: "2024-01-14", badge: "New" },
+            { id: 3, title: "MacBook Pro M2", price: 18000000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=3", description: "MacBook Pro 14 inch, M2 chip, 16GB RAM, 512GB SSD.", seller: "Ravshan IT", sellerAvatar: "https://i.pravatar.cc/150?u=19", phone: "+998 90 333 44 55", views: 2100, date: "2024-01-13", badge: "Top" },
+            { id: 4, title: "Nexia 3", price: 135000000, category: "auto", condition: "Yangi", location: "Samarqand", image: "https://picsum.photos/600/600?random=4", description: "Nexia 3, 2024 yil, 0 km, to'liq komplektatsiya.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 3500, date: "2024-01-12", badge: "Hot" },
+            { id: 5, title: "Cobalt", price: 145000000, category: "auto", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=5", description: "Cobalt 2024, Premium, 0 km, oq rang.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 4200, date: "2024-01-11", badge: "Top" },
+            { id: 6, title: "Ayollar Kiyimlari", price: 250000, category: "clothing", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=6", description: "Yangi kolleksiya, turli o'lchamlarda mavjud.", seller: "Malika Fashion", sellerAvatar: "https://i.pravatar.cc/150?u=13", phone: "+998 90 555 66 77", views: 890, date: "2024-01-10", badge: "New" },
+            { id: 7, title: "Erkaklar Kostyumi", price: 850000, category: "clothing", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=7", description: "Italiya matosidan tikilgan, premium sifat.", seller: "Malika Fashion", sellerAvatar: "https://i.pravatar.cc/150?u=13", phone: "+998 90 555 66 77", views: 650, date: "2024-01-09", badge: "" },
+            { id: 8, title: "2-xonali Uy", price: 450000000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=8", description: "Chilonzor tumani, 5-qavat, 65 kv.m, evro remont.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 5600, date: "2024-01-08", badge: "Top" },
+            { id: 9, title: "Uy Ta'mirlash Xizmati", price: 5000000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=9", description: "Professional ta'mirlash, kafolat bilan.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 1200, date: "2024-01-07", badge: "" },
+            { id: 10, title: "PlayStation 5", price: 6500000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=10", description: "PS5 Disc Edition, 2 ta o'yin bilan.", seller: "Jasur Gamer", sellerAvatar: "https://i.pravatar.cc/150?u=8", phone: "+998 90 777 88 99", views: 3800, date: "2024-01-06", badge: "Hot" },
+            { id: 11, title: "AirPods Pro 2", price: 2800000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=11", description: "Original Apple AirPods Pro 2, MagSafe.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 1100, date: "2024-01-05", badge: "" },
+            { id: 12, title: "Xiaomi 13 Pro", price: 8200000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=12", description: "Xiaomi 13 Pro, 256GB, Ceramic Black.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 920, date: "2024-01-04", badge: "New" },
+            { id: 13, title: "Damas", price: 95000000, category: "auto", condition: "Ishlatilgan", location: "Farg'ona", image: "https://picsum.photos/600/600?random=13", description: "Damas 2020 yil, yaxshi holatda.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 2800, date: "2024-01-03", badge: "" },
+            { id: 14, title: "Kiyim Do'koni", price: 50000000, category: "home", condition: "Biznes", location: "Toshkent", image: "https://picsum.photos/600/600?random=14", description: "Tayyor kiyim do'koni ijaraga yoki sotiladi.", seller: "Malika Fashion", sellerAvatar: "https://i.pravatar.cc/150?u=13", phone: "+998 90 555 66 77", views: 1800, date: "2024-01-02", badge: "" },
+            { id: 15, title: "Make-up Xizmatlari", price: 300000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=15", description: "Professional make-up, to'y va tadbirlar uchun.", seller: "Zarina Beauty", sellerAvatar: "https://i.pravatar.cc/150?u=7", phone: "+998 90 888 99 00", views: 750, date: "2024-01-01", badge: "" },
+            { id: 16, title: "iPad Air 5", price: 7500000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=16", description: "iPad Air 5, 64GB, WiFi, Blue.", seller: "Ravshan IT", sellerAvatar: "https://i.pravatar.cc/150?u=19", phone: "+998 90 333 44 55", views: 1400, date: "2024-01-15", badge: "New" },
+            { id: 17, title: "Apple Watch 8", price: 4200000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=17", description: "Apple Watch Series 8, 45mm, Midnight.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 980, date: "2024-01-14", badge: "" },
+            { id: 18, title: "Malibu 2", price: 280000000, category: "auto", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=18", description: "Malibu 2, 2024 yil, Premium, 0 km.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 6200, date: "2024-01-13", badge: "Top" },
+            { id: 19, title: "Fotograf Xizmati", price: 1000000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=19", description: "To'y, love story, individual fotosessiya.", seller: "Diyor Photo", sellerAvatar: "https://i.pravatar.cc/150?u=15", phone: "+998 90 999 00 11", views: 560, date: "2024-01-12", badge: "" },
+            { id: 20, title: "Sport Kiyimlari", price: 180000, category: "clothing", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=20", description: "Nike, Adidas original sport kiyimlari.", seller: "Akmal Sport", sellerAvatar: "https://i.pravatar.cc/150?u=10", phone: "+998 90 000 11 22", views: 890, date: "2024-01-11", badge: "New" },
+            { id: 21, title: "Gym Abonement", price: 500000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=21", description: "1 oylik fitness klub abonementi.", seller: "Akmal Sport", sellerAvatar: "https://i.pravatar.cc/150?u=10", phone: "+998 90 000 11 22", views: 420, date: "2024-01-10", badge: "" },
+            { id: 22, title: "3-xonali Uy", price: 680000000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=22", description: "Yunusobod, 85 kv.m, evro remont, mebel bilan.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 4100, date: "2024-01-09", badge: "Top" },
+            { id: 23, title: "Ingliz Tili Kurslari", price: 800000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=23", description: "1 oylik ingliz tili kursi, barcha darajalar uchun.", seller: "Kamola Edu", sellerAvatar: "https://i.pravatar.cc/150?u=18", phone: "+998 90 111 00 22", views: 680, date: "2024-01-08", badge: "" },
+            { id: 24, title: "Dasturlash Kurslari", price: 1200000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=24", description: "Python, JavaScript, Frontend kurslari.", seller: "Ravshan IT", sellerAvatar: "https://i.pravatar.cc/150?u=19", phone: "+998 90 333 44 55", views: 920, date: "2024-01-07", badge: "New" },
+            { id: 25, title: "Trafaret Kiyimlar", price: 120000, category: "clothing", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=25", description: "O'z dizayningiz bilan futbolka, xudi.", seller: "Malika Fashion", sellerAvatar: "https://i.pravatar.cc/150?u=13", phone: "+998 90 555 66 77", views: 540, date: "2024-01-06", badge: "" },
+            { id: 26, title: "Sony PlayStation 4", price: 3200000, category: "electronics", condition: "Ishlatilgan", location: "Toshkent", image: "https://picsum.photos/600/600?random=26", description: "PS4 Slim, 500GB, 5 ta o'yin bilan.", seller: "Jasur Gamer", sellerAvatar: "https://i.pravatar.cc/150?u=8", phone: "+998 90 777 88 99", views: 1800, date: "2024-01-05", badge: "" },
+            { id: 27, title: "Gaming PC", price: 12000000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=27", description: "RTX 4060, i5 13400F, 16GB RAM, 1TB SSD.", seller: "Ravshan IT", sellerAvatar: "https://i.pravatar.cc/150?u=19", phone: "+998 90 333 44 55", views: 2400, date: "2024-01-04", badge: "Hot" },
+            { id: 28, title: "Spark", price: 72000000, category: "auto", condition: "Yangi", location: "Andijon", image: "https://picsum.photos/600/600?random=28", description: "Spark 2024, 0 km, to'liq komplekt.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 3100, date: "2024-01-03", badge: "" },
+            { id: 29, title: "Portret Chizish", price: 200000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=29", description: "Foto asosida portret, har qanday o'lchamda.", seller: "Lola Artist", sellerAvatar: "https://i.pravatar.cc/150?u=11", phone: "+998 90 222 11 33", views: 380, date: "2024-01-02", badge: "" },
+            { id: 30, title: "Vokal Darslari", price: 400000, category: "services", condition: "Xizmat", location: "Toshkent", image: "https://picsum.photos/600/600?random=30", description: "Professional vokal darslari, online va offline.", seller: "Sevara Singer", sellerAvatar: "https://i.pravatar.cc/150?u=16", phone: "+998 90 333 22 44", views: 520, date: "2024-01-01", badge: "" },
+            { id: 31, title: "Lacetti", price: 115000000, category: "auto", condition: "Ishlatilgan", location: "Namangan", image: "https://picsum.photos/600/600?random=31", description: "Lacetti 2019 yil, avtomat, yaxshi holat.", seller: "Botir Qodirov", sellerAvatar: "https://i.pravatar.cc/150?u=6", phone: "+998 90 444 55 66", views: 2600, date: "2024-01-15", badge: "" },
+            { id: 32, title: "Monitor 27 inch", price: 2500000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=32", description: "LG 27 inch, IPS, 144Hz, gaming monitor.", seller: "Ravshan IT", sellerAvatar: "https://i.pravatar.cc/150?u=19", phone: "+998 90 333 44 55", views: 1100, date: "2024-01-14", badge: "New" },
+            { id: 33, title: "Klaviatura Mechanical", price: 650000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=33", description: "RGB mechanical keyboard, Blue switches.", seller: "Jasur Gamer", sellerAvatar: "https://i.pravatar.cc/150?u=8", phone: "+998 90 777 88 99", views: 780, date: "2024-01-13", badge: "" },
+            { id: 34, title: "Mushk Gaming", price: 450000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=34", description: "Logitech G Pro X, wireless, RGB.", seller: "Jasur Gamer", sellerAvatar: "https://i.pravatar.cc/150?u=8", phone: "+998 90 777 88 99", views: 650, date: "2024-01-12", badge: "" },
+            { id: 35, title: "Headset Gaming", price: 380000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=35", description: "HyperX Cloud II, 7.1 surround sound.", seller: "Jasur Gamer", sellerAvatar: "https://i.pravatar.cc/150?u=8", phone: "+998 90 777 88 99", views: 890, date: "2024-01-11", badge: "" },
+            { id: 36, title: "Konditsioner", price: 3500000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=36", description: "Samsung 12,000 BTU, inverter.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 1400, date: "2024-01-10", badge: "" },
+            { id: 37, title: "Muzlatgich", price: 4200000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=37", description: "LG No Frost, 300L, energy class A++.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 1200, date: "2024-01-09", badge: "" },
+            { id: 38, title: "Kir Yuvish Mashina", price: 3800000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=38", description: "Bosch 7kg, inverter motor.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 1100, date: "2024-01-08", badge: "" },
+            { id: 39, title: "Televisor 55 inch", price: 5500000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=39", description: "Samsung 55 inch, 4K UHD, Smart TV.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 1800, date: "2024-01-07", badge: "Top" },
+            { id: 40, title: "Robot Changyutgich", price: 2800000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=40", description: "Xiaomi Robot Vacuum, app control.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 920, date: "2024-01-06", badge: "" },
+            { id: 41, title: "Kofe Mashina", price: 1800000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=41", description: "DeLonghi espresso, 15 bar.", seller: "Nargiza Khanum", sellerAvatar: "https://i.pravatar.cc/150?u=9", phone: "+998 90 444 33 22", views: 680, date: "2024-01-05", badge: "" },
+            { id: 42, title: "Blender", price: 450000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=42", description: "Philips blender, 1000W, multiple speeds.", seller: "Nargiza Khanum", sellerAvatar: "https://i.pravatar.cc/150?u=9", phone: "+998 90 444 33 22", views: 420, date: "2024-01-04", badge: "" },
+            { id: 43, title: "Mikser", price: 380000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=43", description: "KitchenAid stand mixer, professional.", seller: "Nargiza Khanum", sellerAvatar: "https://i.pravatar.cc/150?u=9", phone: "+998 90 444 33 22", views: 350, date: "2024-01-03", badge: "" },
+            { id: 44, title: "Havo Namlagich", price: 650000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=44", description: "Xiaomi humidifier, 4L, app control.", seller: "Anvar Builder", sellerAvatar: "https://i.pravatar.cc/150?u=17", phone: "+998 90 666 77 88", views: 580, date: "2024-01-02", badge: "" },
+            { id: 45, title: "Dazmollash Stendi", price: 1200000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=45", description: "Philips steam generator, professional.", seller: "Zarina Beauty", sellerAvatar: "https://i.pravatar.cc/150?u=7", phone: "+998 90 888 99 00", views: 420, date: "2024-01-01", badge: "" },
+            { id: 46, title: "Fen Professional", price: 850000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=46", description: "Dyson Supersonic, original.", seller: "Zarina Beauty", sellerAvatar: "https://i.pravatar.cc/150?u=7", phone: "+998 90 888 99 00", views: 780, date: "2024-01-15", badge: "New" },
+            { id: 47, title: "Trimmer", price: 280000, category: "home", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=47", description: "Philips trimmer, waterproof.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 520, date: "2024-01-14", badge: "" },
+            { id: 48, title: "Elektr Britva", price: 650000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=48", description: "Braun Series 9, premium.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 680, date: "2024-01-13", badge: "" },
+            { id: 49, title: "Powerbank 20000mAh", price: 250000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=49", description: "Xiaomi powerbank, fast charge.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 890, date: "2024-01-12", badge: "" },
+            { id: 50, title: "Zaryadlovchi Qurilma", price: 180000, category: "electronics", condition: "Yangi", location: "Toshkent", image: "https://picsum.photos/600/600?random=50", description: "Anker 65W GaN, fast charge.", seller: "Rustam Tech", sellerAvatar: "https://i.pravatar.cc/150?u=4", phone: "+998 90 222 33 44", views: 720, date: "2024-01-11", badge: "" }
+        ];
+
+        // ========================================
+        // TELEGRAM CONFIG
+        // ========================================
+        const TELEGRAM_CONFIG = {
+            botToken: "SIZNING_BOT_TOKENINGIZ",
+            adminChatId: "SIZNING_CHAT_ID"
+        };
+
+        // ========================================
+        // STATE
+        // ========================================
+        let currentProduct = null;
+        let currentFilter = 'all';
+        let currentSort = 'newest';
+        let searchQuery = '';
+
+        // ========================================
+        // INIT
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(PRODUCTS);
+            
+            document.getElementById('shopSearch').addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                filterAndRender();
+            });
+        });
+
+        // ========================================
+        // RENDER PRODUCTS
+        // ========================================
+        function renderProducts(products) {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (products.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                resultsCount.innerHTML = '<span>0</span> ta e\'lon mavjud';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            resultsCount.innerHTML = `<span>${products.length}</span> ta e'lon mavjud`;
+
+            grid.innerHTML = products.map(product => `
+                <div class="product-card fade-in" onclick="openProductModal(${product.id})">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.title}" class="product-image">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <button class="product-favorite" onclick="event.stopPropagation(); toggleFavorite(${product.id})">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${product.title}</div>
+                        <div class="product-price">${formatPrice(product.price)} <span>so'm</span></div>
+                        <div class="product-meta">
+                            <div class="product-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${product.location}
+                            </div>
+                            <div class="product-date">
+                                <i class="fas fa-eye"></i>
+                                ${formatNumber(product.views)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========================================
+        // FILTER & SORT
+        // ========================================
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.category-chip').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.category-chip').classList.add('active');
+            
+            filterAndRender();
+        }
+
+        function sortProducts() {
+            currentSort = document.getElementById('sortSelect').value;
+            filterAndRender();
+        }
+
+        function filterAndRender() {
+            let filtered = [...PRODUCTS];
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(p => p.category === currentFilter);
+            }
+
+            if (searchQuery) {
+                filtered = filtered.filter(p => 
+                    p.title.toLowerCase().includes(searchQuery) ||
+                    p.description.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            switch (currentSort) {
+                case 'newest':
+                    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    break;
+                case 'price-asc':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'popular':
+                    filtered.sort((a, b) => b.views - a.views);
+                    break;
+            }
+
+            renderProducts(filtered);
+        }
+
+        // ========================================
+        // PRODUCT MODAL
+        // ========================================
+        function openProductModal(id) {
+            const product = PRODUCTS.find(p => p.id === id);
+            if (!product) return;
+
+            currentProduct = product;
+
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalTitle').innerText = product.title;
+            document.getElementById('modalPrice').innerText = formatPrice(product.price) + ' so\'m';
+            document.getElementById('modalDescription').innerText = product.description;
+            document.getElementById('modalCondition').innerText = product.condition;
+            document.getElementById('modalLocation').innerText = product.location;
+            document.getElementById('modalCategory').innerText = getCategoryName(product.category);
+            document.getElementById('modalViews').innerText = formatNumber(product.views);
+            document.getElementById('sellerAvatar').src = product.sellerAvatar;
+            document.getElementById('sellerName').innerText = product.seller;
+            document.getElementById('phoneNumber').innerText = product.phone;
+
+            document.getElementById('phoneReveal').classList.remove('active');
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentProduct = null;
+        }
+
+        function revealPhone() {
+            document.getElementById('phoneReveal').classList.add('active');
+        }
+
+        function contactSeller() {
+            if (!currentProduct) return;
+            showStatus("💬 Xabar yuborish oynasi ochiladi...", "success");
+        }
+
+        function toggleFavorite(id) {
+            const btn = event.target.closest('.product-favorite');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                showStatus("❤️ Saqlandi!", "success");
+            } else {
+                showStatus("❌ Saqlashdan olindi", "error");
+            }
+        }
+
+        // ========================================
+        // ADD PRODUCT MODAL
+        // ========================================
+        function openAddProductModal() {
+            document.getElementById('addProductModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddProductModal() {
+            document.getElementById('addProductModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('addProductForm').reset();
+        }
+
+        async function submitProduct(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+
+            const productData = {
+                name: document.getElementById('productName').value,
+                phone: document.getElementById('productPhone').value,
+                location: document.getElementById('productLocation').value,
+                title: document.getElementById('productTitle').value,
+                price: document.getElementById('productPrice').value,
+                category: document.getElementById('productCategory').value,
+                description: document.getElementById('productDescription').value,
+                image: document.getElementById('productImage').value
+            };
+
+            const message = `
+🛍️ <b>YANGI TAVAR TAKLIFI</b>
+
+👤 <b>Ism:</b> ${productData.name}
+📱 <b>Telefon:</b> ${productData.phone}
+📍 <b>Manzil:</b> ${productData.location}
+📦 <b>Mahsulot:</b> ${productData.title}
+💰 <b>Narx:</b> ${formatPrice(productData.price)} so'm
+🏷️ <b>Kategoriya:</b> ${getCategoryName(productData.category)}
+📝 <b>Tavsif:</b> ${productData.description}
+🖼️ <b>Rasm:</b> ${productData.image || 'Yo\'q'}
+📅 <b>Sana:</b> ${new Date().toLocaleString('uz-UZ')}
+            `.trim();
+
+            try {
+                const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CONFIG.adminChatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    showStatus("✅ Taklifingiz yuborildi! Biz tez orada aloqaga chiqamiz.", "success");
+                    closeAddProductModal();
+                } else {
+                    throw new Error(data.description);
+                }
+
+            } catch (error) {
+                console.error('Telegram Error:', error);
+                showStatus("❌ Xatolik: " + error.message, "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> YUBORISH';
+            }
+        }
+
+        // ========================================
+        // HELPERS
+        // ========================================
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num;
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                electronics: 'Elektronika',
+                clothing: 'Kiyim',
+                auto: 'Avto',
+                home: 'Uy-joy',
+                services: 'Xizmatlar',
+                other: 'Boshqa'
+            };
+            return names[category] || category;
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMsg');
+            statusEl.innerText = message;
+            statusEl.className = `status-message status-${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modals on outside click
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') {
+                closeProductModal();
+            }
+        });
+
+        document.getElementById('addProductModal').addEventListener('click', (e) => {
+            if (e.target.id === 'addProductModal') {
+                closeAddProductModal();
+            }
+        });
+    </script>
+</body>
+</html>
