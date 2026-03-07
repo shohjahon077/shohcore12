@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shohcore12 | Reklama</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --secondary: #8b5cf6;
+            --secondary-glow: rgba(139, 92, 246, 0.5);
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.5);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0a0e1a;
+            --bg-card: #151e32;
+            --bg-hover: #1e2a45;
+            --text: #f8fafc;
+            --text-sec: #94a3b8;
+            --border: #2d3748;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #ef4444 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 85px;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(30px);
+            padding: 20px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .add-ad-btn {
+            background: var(--gradient-gold);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+            transition: all 0.3s;
+        }
+
+        .add-ad-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+        }
+
+        /* ADS CONTAINER */
+        .ads-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* HERO BANNER */
+        .hero-banner {
+            background: var(--gradient);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg), 0 0 50px var(--primary-glow);
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: heroRotate 20s linear infinite;
+        }
+
+        @keyframes heroRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-num {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hero-cta {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 16px 35px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .hero-image {
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .hero-image i {
+            font-size: 8rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* SEARCH & FILTERS */
+        .ads-search {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sec);
+            font-size: 1.1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .category-filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-chip {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-sec);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .category-chip:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        .category-chip.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* ADS GRID */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .ad-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .ad-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .ad-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--warning);
+            box-shadow: var(--shadow-lg), 0 0 40px rgba(245, 158, 11, 0.3);
+        }
+
+        .ad-card:hover::before {
+            opacity: 1;
+        }
+
+        .ad-card.premium {
+            border: 2px solid var(--warning);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .ad-card.premium::before {
+            opacity: 1;
+        }
+
+        .ad-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 60%;
+            background: var(--bg-hover);
+            overflow: hidden;
+        }
+
+        .ad-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .ad-card:hover .ad-image {
+            transform: scale(1.1);
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gradient-gold);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .ad-verified {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--success);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+        }
+
+        .ad-info {
+            padding: 20px;
+        }
+
+        .ad-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .ad-company {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ad-company i {
+            font-size: 0.8rem;
+        }
+
+        .ad-description {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ad-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ad-views {
+            font-size: 0.8rem;
+            color: var(--text-sec);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ad-views i {
+            color: var(--primary);
+        }
+
+        .ad-price {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--warning);
+        }
+
+        .ad-footer {
+            padding: 15px 20px;
+            background: var(--bg-hover);
+            display: flex;
+            gap: 10px;
+        }
+
+        .ad-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .ad-btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .ad-btn-primary:hover {
+            box-shadow: 0 6px 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .ad-btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .ad-btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* AD DETAIL MODAL */
+        .ad-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .ad-modal.active {
+            display: flex;
+            animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 60%;
+            background: var(--bg-hover);
+        }
+
+        .modal-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: var(--gradient-gold);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .modal-company {
+            font-size: 1rem;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-description {
+            font-size: 0.95rem;
+            color: var(--text-sec);
+            margin-bottom: 25px;
+            line-height: 1.8;
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-info-item {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-info-label {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modal-info-label i {
+            color: var(--primary);
+        }
+
+        .modal-info-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .modal-seller {
+            background: var(--bg-hover);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .seller-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .seller-info {
+            flex: 1;
+        }
+
+        .seller-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .seller-rating {
+            font-size: 0.85rem;
+            color: var(--warning);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .seller-rating span {
+            color: var(--text-sec);
+            margin-left: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .modal-btn-primary:hover {
+            box-shadow: 0 6px 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-gold {
+            background: var(--gradient-gold);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .modal-btn-gold:hover {
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .modal-btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .phone-reveal {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .phone-reveal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .phone-note {
+            font-size: 0.8rem;
+            color: var(--text-sec);
+        }
+
+        /* ADD AD MODAL */
+        .add-ad-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .add-ad-modal.active {
+            display: flex;
+            animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .add-modal-content {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 550px;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .add-modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .add-modal-icon {
+            font-size: 3.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .add-modal-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .add-modal-desc {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            line-height: 1.6;
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pricing-plan {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-plan:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .pricing-plan.active {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .pricing-plan-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .pricing-plan-price {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--warning);
+            margin-bottom: 5px;
+        }
+
+        .pricing-plan-days {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-gold);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-sec);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .empty-title {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .empty-text {
+            font-size: 0.95rem;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(21, 30, 50, 0.98);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 500;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            color: var(--text-sec);
+            font-size: 0.75rem;
+            text-align: center;
+            text-decoration: none;
+            width: 20%;
+            transition: all 0.3s;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-item:hover::after {
+            width: 30px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-light);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+        }
+
+        .nav-item.active::after {
+            width: 40px;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ad-card {
+            animation: slideIn 0.4s ease backwards;
+        }
+
+        .ad-card:nth-child(1) { animation-delay: 0.05s; }
+        .ad-card:nth-child(2) { animation-delay: 0.1s; }
+        .ad-card:nth-child(3) { animation-delay: 0.15s; }
+        .ad-card:nth-child(4) { animation-delay: 0.2s; }
+        .ad-card:nth-child(5) { animation-delay: 0.25s; }
+        .ad-card:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* STATUS MESSAGE */
+        .status-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            z-index: 3000;
+            display: none;
+            animation: statusSlideDown 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes statusSlideDown {
+            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .status-success {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+        }
+
+        .status-error {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: white;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .hero-stat-num {
+                font-size: 1.4rem;
+            }
+
+            .hero-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .hero-image i {
+                font-size: 5rem;
+            }
+
+            .pricing-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">SHOH<span>CORE12</span></div>
+        <button class="add-ad-btn" onclick="openAddAdModal()">
+            <i class="fas fa-plus"></i>
+            Reklama Berish
+        </button>
+    </div>
+
+    <!-- ADS CONTAINER -->
+    <div class="ads-container">
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">🚀 Reklama Platformasi</h1>
+                    <p class="hero-subtitle">
+                        Shohcore12 ilovasida o'z biznesingizni millionlab foydalanuvchilarga 
+                        taniting! Samarador va arzon reklama yechimlari.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">50K+</span>
+                            <span class="hero-stat-label">Kundalik Foydalanuvchi</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">100K+</span>
+                            <span class="hero-stat-label">Oylik Ko'rishlar</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">500+</span>
+                            <span class="hero-stat-label">Faol Reklamalar</span>
+                        </div>
+                    </div>
+                    <button class="hero-cta" onclick="openAddAdModal()">
+                        <i class="fas fa-rocket"></i>
+                        Hoziroq Boshlash
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="ads-search">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="adsSearch" placeholder="Reklama qidirish..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-filters">
+            <button class="category-chip active" onclick="filterCategory('all')">
+                <i class="fas fa-th"></i> Barchasi
+            </button>
+            <button class="category-chip" onclick="filterCategory('business')">
+                <i class="fas fa-briefcase"></i> Biznes
+            </button>
+            <button class="category-chip" onclick="filterCategory('education')">
+                <i class="fas fa-graduation-cap"></i> Ta'lim
+            </button>
+            <button class="category-chip" onclick="filterCategory('services')">
+                <i class="fas fa-tools"></i> Xizmatlar
+            </button>
+            <button class="category-chip" onclick="filterCategory('products')">
+                <i class="fas fa-box"></i> Mahsulotlar
+            </button>
+            <button class="category-chip" onclick="filterCategory('events')">
+                <i class="fas fa-calendar"></i> Tadbirlar
+            </button>
+        </div>
+
+        <!-- Ads Grid -->
+        <div class="ads-grid" id="adsGrid">
+            <!-- Ads will be injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-bullhorn empty-icon"></i>
+            <div class="empty-title">Reklama topilmadi</div>
+            <div class="empty-text">Qidiruv so'zingizni o'zgartirib ko'ring</div>
+        </div>
+    </div>
+
+    <!-- AD DETAIL MODAL -->
+    <div class="ad-modal" id="adModal">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <button class="modal-close" onclick="closeAdModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-badge" id="modalBadge">PREMIUM</div>
+                <div class="modal-title" id="modalTitle">Reklama Nomi</div>
+                <div class="modal-company" id="modalCompany">
+                    <i class="fas fa-building"></i>
+                    Kompaniya Nomi
+                </div>
+                <div class="modal-description" id="modalDescription">Tavsif</div>
+                
+                <div class="modal-info-grid">
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">
+                            <i class="fas fa-tag"></i>
+                            Kategoriya
+                        </div>
+                        <div class="modal-info-value" id="modalCategory">Biznes</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Joylashuv
+                        </div>
+                        <div class="modal-info-value" id="modalLocation">Toshkent</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">
+                            <i class="fas fa-eye"></i>
+                            Ko'rishlar
+                        </div>
+                        <div class="modal-info-value" id="modalViews">0</div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">
+                            <i class="fas fa-clock"></i>
+                            Muddat
+                        </div>
+                        <div class="modal-info-value" id="modalDuration">30 kun</div>
+                    </div>
+                </div>
+
+                <div class="modal-seller">
+                    <img src="" alt="" class="seller-avatar" id="sellerAvatar">
+                    <div class="seller-info">
+                        <div class="seller-name" id="sellerName">Kompaniya</div>
+                        <div class="seller-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                            <span style="color: var(--text-sec); margin-left: 8px;">(120 sharh)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-primary" onclick="revealPhone()">
+                        <i class="fas fa-phone-alt"></i>
+                        Raqamni Ko'rsatish
+                    </button>
+                    <div class="phone-reveal" id="phoneReveal">
+                        <div class="phone-number" id="phoneNumber">+998 90 123 45 67</div>
+                        <div class="phone-note">📞 Ish vaqti: 09:00 - 18:00</div>
+                    </div>
+                    <button class="modal-btn modal-btn-gold" onclick="contactAdvertiser()">
+                        <i class="fab fa-telegram-plane"></i>
+                        Telegram Orqali
+                    </button>
+                    <button class="modal-btn modal-btn-secondary" onclick="shareAd()">
+                        <i class="fas fa-share-alt"></i>
+                        Ulashish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD AD MODAL -->
+    <div class="add-ad-modal" id="addAdModal">
+        <div class="add-modal-content">
+            <div class="add-modal-header">
+                <div class="add-modal-icon">
+                    <i class="fas fa-ad"></i>
+                </div>
+                <div class="add-modal-title">Reklama Joylash</div>
+                <div class="add-modal-desc">
+                    Shohcore12 platformasida o'z reklamangizni joylashtiring va 
+                    millionlab foydalanuvchilarga yetib boring!
+                </div>
+            </div>
+
+            <!-- Pricing Plans -->
+            <div class="pricing-plans">
+                <div class="pricing-plan" onclick="selectPlan('starter', this)">
+                    <div class="pricing-plan-name">Boshlang'ich</div>
+                    <div class="pricing-plan-price">50,000</div>
+                    <div class="pricing-plan-days">7 kun</div>
+                </div>
+                <div class="pricing-plan active" onclick="selectPlan('standard', this)">
+                    <div class="pricing-plan-name">Standart</div>
+                    <div class="pricing-plan-price">120,000</div>
+                    <div class="pricing-plan-days">30 kun</div>
+                </div>
+                <div class="pricing-plan" onclick="selectPlan('premium', this)">
+                    <div class="pricing-plan-name">Premium</div>
+                    <div class="pricing-plan-price">300,000</div>
+                    <div class="pricing-plan-days">90 kun</div>
+                </div>
+            </div>
+
+            <form id="addAdForm" onsubmit="submitAd(event)">
+                <div class="form-group">
+                    <label class="form-label">Kompaniya/Shaxs Nomi</label>
+                    <input type="text" class="form-input" id="adCompany" placeholder="Kompaniya nomi" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Telefon Raqam</label>
+                    <input type="tel" class="form-input" id="adPhone" placeholder="+998 90 123 45 67" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Telegram Username</label>
+                    <input type="text" class="form-input" id="adTelegram" placeholder="@username">
+                    <div class="form-hint">Aloqa uchun (ixtiyoriy)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reklama Sarlavhasi</label>
+                    <input type="text" class="form-input" id="adTitle" placeholder="Qisqa va jozibali sarlavha" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Kategoriya</label>
+                    <select class="form-select" id="adCategory" required>
+                        <option value="">Tanlang...</option>
+                        <option value="business">Biznes</option>
+                        <option value="education">Ta'lim</option>
+                        <option value="services">Xizmatlar</option>
+                        <option value="products">Mahsulotlar</option>
+                        <option value="events">Tadbirlar</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Joylashuv</label>
+                    <input type="text" class="form-input" id="adLocation" placeholder="Toshkent, O'zbekiston" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Reklama Matni</label>
+                    <textarea class="form-textarea" id="adDescription" placeholder="Reklama haqida to'liq ma'lumot..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Rasm (URL)</label>
+                    <input type="url" class="form-input" id="adImage" placeholder="https://example.com/image.jpg">
+                    <div class="form-hint">Rasm havolasini qo'ying yoki bo'sh qoldiring</div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    YUBORISH
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- STATUS MESSAGE -->
+    <div class="status-message" id="statusMsg"></div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Bosh Sahifa
+        </a>
+        <a href="qidiruv.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            Qidiruv
+        </a>
+        <a href="music.html" class="nav-item">
+            <i class="fas fa-music"></i>
+            Musiqa
+        </a>
+        <a href="shop.html" class="nav-item">
+            <i class="fas fa-shopping-bag"></i>
+            Shop
+        </a>
+        <a href="ads.html" class="nav-item active">
+            <i class="fas fa-bullhorn"></i>
+            Reklama
+        </a>
+    </div>
+
+    <script>
+        // ========================================
+        // 📢 ADS DATABASE
+        // ========================================
+        const ADS = [
+            {
+                id: 1,
+                title: "IT Kurslari - Dasturlashni O'rganing",
+                company: "Ravshan IT Academy",
+                description: "Python, JavaScript, Frontend va Backend dasturlash kurslari. 0 dan boshlab professional darajagacha. Online va offline darslar. Diplomat bilan ta'minlanadi.",
+                category: "education",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=100",
+                views: 15420,
+                duration: "30 kun",
+                seller: "Ravshan IT",
+                sellerAvatar: "https://i.pravatar.cc/150?u=19",
+                phone: "+998 90 333 44 55",
+                telegram: "@ravshan_code",
+                premium: true,
+                verified: true,
+                date: "2024-01-15"
+            },
+            {
+                id: 2,
+                title: "Ingliz Tili Kurslari - Barcha Darajalar",
+                company: "Kamola Education Center",
+                description: "IELTS, TOEFL, General English kurslari. Tajribali o'qituvchilar. Zamonaviy metodikalar. Guruh va individual darslar mavjud.",
+                category: "education",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=101",
+                views: 12350,
+                duration: "30 kun",
+                seller: "Kamola Edu",
+                sellerAvatar: "https://i.pravatar.cc/150?u=18",
+                phone: "+998 90 111 00 22",
+                telegram: "@kamola_english",
+                premium: true,
+                verified: true,
+                date: "2024-01-14"
+            },
+            {
+                id: 3,
+                title: "Fitness Klub - Sog'lom Hayot",
+                company: "Akmal Sport Club",
+                description: "Zamonaviy jihozlar, professional murabbiylar. Sauna, hamom, basseyn. Oylik, 3 oylik va yillik abonementlar. Birinchi mashg'ulot bepul!",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=102",
+                views: 8900,
+                duration: "30 kun",
+                seller: "Akmal Sport",
+                sellerAvatar: "https://i.pravatar.cc/150?u=10",
+                phone: "+998 90 000 11 22",
+                telegram: "@akmal_gym",
+                premium: false,
+                verified: true,
+                date: "2024-01-13"
+            },
+            {
+                id: 4,
+                title: "Make-up Xizmatlari - Professional",
+                company: "Zarina Beauty Studio",
+                description: "To'y, kechki, kundalik make-up. Soch turmaklari. Manikyur, pedikyur. Uyga chiqish xizmati mavjud. Barcha turdagi go'zallik xizmatlari.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=103",
+                views: 7650,
+                duration: "30 kun",
+                seller: "Zarina Beauty",
+                sellerAvatar: "https://i.pravatar.cc/150?u=7",
+                phone: "+998 90 888 99 00",
+                telegram: "@zarina_makeup",
+                premium: false,
+                verified: true,
+                date: "2024-01-12"
+            },
+            {
+                id: 5,
+                title: "Foto va Video Xizmatlari",
+                company: "Diyor Photo Studio",
+                description: "To'y, love story, individual fotosessiya. Video suratga olish. Montaj va obrabotka. Drone suratga olish. Professional uskunalar.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=104",
+                views: 6200,
+                duration: "30 kun",
+                seller: "Diyor Photo",
+                sellerAvatar: "https://i.pravatar.cc/150?u=15",
+                phone: "+998 90 999 00 11",
+                telegram: "@diyor_lens",
+                premium: true,
+                verified: true,
+                date: "2024-01-11"
+            },
+            {
+                id: 6,
+                title: "Ayollar Kiyimlari Do'koni",
+                company: "Malika Fashion",
+                description: "Yangi kolleksiya! Ko'ylaklar, bluzkalar, shimlar, yubkalar. Turli o'lchamlarda. Sifatli matolar. Chegirmalar mavjud. Yetkazib berish xizmati.",
+                category: "products",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=105",
+                views: 9800,
+                duration: "30 kun",
+                seller: "Malika Fashion",
+                sellerAvatar: "https://i.pravatar.cc/150?u=13",
+                phone: "+998 90 555 66 77",
+                telegram: "@malika_clothes",
+                premium: false,
+                verified: true,
+                date: "2024-01-10"
+            },
+            {
+                id: 7,
+                title: "Uy Ta'mirlash Xizmatlari",
+                company: "Anvar Builder",
+                description: "Professional ta'mirlash xizmatlari. Evro remont. Sifat kafolati. Barcha turdagi ta'mirlash ishlari. Bepul konsultatsiya va smeta.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=106",
+                views: 5400,
+                duration: "30 kun",
+                seller: "Anvar Builder",
+                sellerAvatar: "https://i.pravatar.cc/150?u=17",
+                phone: "+998 90 666 77 88",
+                telegram: "@anvar_home",
+                premium: false,
+                verified: false,
+                date: "2024-01-09"
+            },
+            {
+                id: 8,
+                title: "Telefon Ta'mirlash Markazi",
+                company: "Rustam Tech Service",
+                description: "iPhone, Samsung, Xiaomi va boshqa telefonlarni ta'mirlash. Ekran almashish, batareya, dasturiy ta'minot. Tezkor va sifatli. Kafolat 6 oy.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=107",
+                views: 11200,
+                duration: "30 kun",
+                seller: "Rustam Tech",
+                sellerAvatar: "https://i.pravatar.cc/150?u=4",
+                phone: "+998 90 222 33 44",
+                telegram: "@rustam_fix",
+                premium: true,
+                verified: true,
+                date: "2024-01-08"
+            },
+            {
+                id: 9,
+                title: "Ovqat Yetkazib Berish Xizmati",
+                company: "Nargiza Kitchen",
+                description: "Uy taomlari yetkazib berish. Har kuni yangi menyu. Sifatli va toza mahsulotlar. Tezkor yetkazib berish. Buyurtma uchun qo'ng'iroq qiling.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=108",
+                views: 8700,
+                duration: "30 kun",
+                seller: "Nargiza Khanum",
+                sellerAvatar: "https://i.pravatar.cc/150?u=9",
+                phone: "+998 90 444 33 22",
+                telegram: "@nargiza_cook",
+                premium: false,
+                verified: true,
+                date: "2024-01-07"
+            },
+            {
+                id: 10,
+                title: "Avto Salon - Yangi Mashinalar",
+                company: "Botir Auto Center",
+                description: "Nexia 3, Cobalt, Malibu 2, Spark. Yangi va ishlatilgan mashinalar. Kreditga sotib olish imkoniyati. Trade-in xizmati. To'liq hujjatlar bilan.",
+                category: "business",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=109",
+                views: 18500,
+                duration: "90 kun",
+                seller: "Botir Qodirov",
+                sellerAvatar: "https://i.pravatar.cc/150?u=6",
+                phone: "+998 90 444 55 66",
+                telegram: "@botir_auto",
+                premium: true,
+                verified: true,
+                date: "2024-01-06"
+            },
+            {
+                id: 11,
+                title: "Gaming Kompyuterlar Yig'ish",
+                company: "Jasur Gaming PC",
+                description: "Professional gaming kompyuterlar yig'ish. RTX 4060, 4070, 4080. Intel va AMD protsessorlar. Kafolat va xizmat ko'rsatish. Kredit imkoniyati.",
+                category: "products",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=110",
+                views: 14200,
+                duration: "30 kun",
+                seller: "Jasur Gamer",
+                sellerAvatar: "https://i.pravatar.cc/150?u=8",
+                phone: "+998 90 777 88 99",
+                telegram: "@jasur_play",
+                premium: false,
+                verified: true,
+                date: "2024-01-05"
+            },
+            {
+                id: 12,
+                title: "Vokal Darslari - Online & Offline",
+                company: "Sevara Voice Studio",
+                description: "Professional vokal darslari. Boshlang'ich va professional daraja. Sahna mahorati. Studio yozish xizmati. Birinchi dars bepul!",
+                category: "education",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=111",
+                views: 6800,
+                duration: "30 kun",
+                seller: "Sevara Singer",
+                sellerAvatar: "https://i.pravatar.cc/150?u=16",
+                phone: "+998 90 333 22 44",
+                telegram: "@sevara_voice",
+                premium: false,
+                verified: true,
+                date: "2024-01-04"
+            },
+            {
+                id: 13,
+                title: "Portret Chizish Xizmati",
+                company: "Lola Art Studio",
+                description: "Foto asosida portret chizish. Yog'li bo'yoq, akvarel, qalam. Har qanday o'lchamda. Sovg'a uchun ajoyib variant. Buyurtma 3-5 kun.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=112",
+                views: 4200,
+                duration: "30 kun",
+                seller: "Lola Artist",
+                sellerAvatar: "https://i.pravatar.cc/150?u=11",
+                phone: "+998 90 222 11 33",
+                telegram: "@lola_draw",
+                premium: false,
+                verified: false,
+                date: "2024-01-03"
+            },
+            {
+                id: 14,
+                title: "Sayohat Agentligi - Dunyo Bo'ylab",
+                company: "Sardor Travel",
+                description: "Turkiya, Dubay, Yevropa, Osiyo. Viza qo'llab-quvvatlash. Avia va mehmonxona band qilish. Guruh va individual turlar. Eng arzon narxlar.",
+                category: "services",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=113",
+                views: 12600,
+                duration: "90 kun",
+                seller: "Sardor Travel",
+                sellerAvatar: "https://i.pravatar.cc/150?u=12",
+                phone: "+998 90 123 45 67",
+                telegram: "@sardor_uz",
+                premium: true,
+                verified: true,
+                date: "2024-01-02"
+            },
+            {
+                id: 15,
+                title: "Kulgu Kechasi - Stand-up Show",
+                company: "Umid Comedy Club",
+                description: "Har oy yangi stand-up shoular. Mashhur komediyachilar. Ajoyib kayfiyat va kulgu. Chiptalar oldindan band qiling. Joylar cheklangan!",
+                category: "events",
+                location: "Toshkent",
+                image: "https://picsum.photos/600/600?random=114",
+                views: 9500,
+                duration: "7 kun",
+                seller: "Umid Comedian",
+                sellerAvatar: "https://i.pravatar.cc/150?u=14",
+                phone: "+998 90 111 22 33",
+                telegram: "@umid_kulgu",
+                premium: false,
+                verified: true,
+                date: "2024-01-01"
+            }
+        ];
+
+        // ========================================
+        // TELEGRAM CONFIG
+        // ========================================
+        const TELEGRAM_CONFIG = {
+            botToken: "SIZNING_BOT_TOKENINGIZ",
+            adminChatId: "SIZNING_CHAT_ID"
+        };
+
+        // ========================================
+        // STATE
+        // ========================================
+        let currentAd = null;
+        let currentFilter = 'all';
+        let currentSort = 'newest';
+        let searchQuery = '';
+        let selectedPlan = 'standard';
+
+        // ========================================
+        // INIT
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAds(ADS);
+            
+            document.getElementById('adsSearch').addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                filterAndRender();
+            });
+        });
+
+        // ========================================
+        // RENDER ADS
+        // ========================================
+        function renderAds(ads) {
+            const grid = document.getElementById('adsGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (ads.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            grid.innerHTML = ads.map(ad => `
+                <div class="ad-card fade-in ${ad.premium ? 'premium' : ''}" onclick="openAdModal(${ad.id})">
+                    <div class="ad-image-container">
+                        <img src="${ad.image}" alt="${ad.title}" class="ad-image">
+                        ${ad.premium ? '<div class="ad-badge"><i class="fas fa-crown"></i> PREMIUM</div>' : ''}
+                        ${ad.verified ? '<div class="ad-verified"><i class="fas fa-check"></i></div>' : ''}
+                    </div>
+                    <div class="ad-info">
+                        <div class="ad-title">${ad.title}</div>
+                        <div class="ad-company">
+                            <i class="fas fa-building"></i>
+                            ${ad.company}
+                        </div>
+                        <div class="ad-description">${ad.description}</div>
+                        <div class="ad-meta">
+                            <div class="ad-views">
+                                <i class="fas fa-eye"></i>
+                                ${formatNumber(ad.views)}
+                            </div>
+                            <div class="ad-price">${ad.duration}</div>
+                        </div>
+                    </div>
+                    <div class="ad-footer">
+                        <button class="ad-btn ad-btn-primary" onclick="event.stopPropagation(); contactAdvertiser(${ad.id})">
+                            <i class="fas fa-comment"></i>
+                            Aloqa
+                        </button>
+                        <button class="ad-btn ad-btn-secondary" onclick="event.stopPropagation(); shareAd(${ad.id})">
+                            <i class="fas fa-share-alt"></i>
+                            Ulashish
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========================================
+        // FILTER & SORT
+        // ========================================
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.category-chip').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.category-chip').classList.add('active');
+            
+            filterAndRender();
+        }
+
+        function filterAndRender() {
+            let filtered = [...ADS];
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(ad => ad.category === currentFilter);
+            }
+
+            if (searchQuery) {
+                filtered = filtered.filter(ad => 
+                    ad.title.toLowerCase().includes(searchQuery) ||
+                    ad.company.toLowerCase().includes(searchQuery) ||
+                    ad.description.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            renderAds(filtered);
+        }
+
+        // ========================================
+        // AD MODAL
+        // ========================================
+        function openAdModal(id) {
+            const ad = ADS.find(a => a.id === id);
+            if (!ad) return;
+
+            currentAd = ad;
+
+            document.getElementById('modalImage').src = ad.image;
+            document.getElementById('modalBadge').innerText = ad.premium ? '⭐ PREMIUM' : '📢 REKLAMA';
+            document.getElementById('modalTitle').innerText = ad.title;
+            document.getElementById('modalCompany').innerHTML = `<i class="fas fa-building"></i> ${ad.company}`;
+            document.getElementById('modalDescription').innerText = ad.description;
+            document.getElementById('modalCategory').innerText = getCategoryName(ad.category);
+            document.getElementById('modalLocation').innerText = ad.location;
+            document.getElementById('modalViews').innerText = formatNumber(ad.views);
+            document.getElementById('modalDuration').innerText = ad.duration;
+            document.getElementById('sellerAvatar').src = ad.sellerAvatar;
+            document.getElementById('sellerName').innerText = ad.seller;
+            document.getElementById('phoneNumber').innerText = ad.phone;
+
+            document.getElementById('phoneReveal').classList.remove('active');
+            document.getElementById('adModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdModal() {
+            document.getElementById('adModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentAd = null;
+        }
+
+        function revealPhone() {
+            document.getElementById('phoneReveal').classList.add('active');
+        }
+
+        function contactAdvertiser(id) {
+            const ad = id ? ADS.find(a => a.id === id) : currentAd;
+            if (!ad) return;
+            
+            if (ad.telegram) {
+                window.open(`https://t.me/${ad.telegram.replace('@', '')}`, '_blank');
+            } else {
+                showStatus("📞 Telefon raqamni ko'rsatish tugmasini bosing", "success");
+            }
+        }
+
+        function shareAd(id) {
+            const ad = id ? ADS.find(a => a.id === id) : currentAd;
+            if (!ad) return;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: ad.title,
+                    text: `${ad.company} - ${ad.description.substring(0, 100)}...`,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showStatus("🔗 Havola nusxalandi!", "success");
+            }
+        }
+
+        // ========================================
+        // ADD AD MODAL
+        // ========================================
+        function openAddAdModal() {
+            document.getElementById('addAdModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddAdModal() {
+            document.getElementById('addAdModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('addAdForm').reset();
+        }
+
+        function selectPlan(plan, element) {
+            selectedPlan = plan;
+            
+            document.querySelectorAll('.pricing-plan').forEach(p => {
+                p.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        async function submitAd(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+
+            const adData = {
+                company: document.getElementById('adCompany').value,
+                phone: document.getElementById('adPhone').value,
+                telegram: document.getElementById('adTelegram').value,
+                title: document.getElementById('adTitle').value,
+                category: document.getElementById('adCategory').value,
+                location: document.getElementById('adLocation').value,
+                description: document.getElementById('adDescription').value,
+                image: document.getElementById('adImage').value,
+                plan: selectedPlan
+            };
+
+            const planPrices = {
+                starter: '50,000 so\'m (7 kun)',
+                standard: '120,000 so\'m (30 kun)',
+                premium: '300,000 so\'m (90 kun)'
+            };
+
+            const message = `
+📢 <b>YANGI REKLAMA TAKLIFI</b>
+
+🏢 <b>Kompaniya:</b> ${adData.company}
+📱 <b>Telefon:</b> ${adData.phone}
+✈️ <b>Telegram:</b> ${adData.telegram || 'Yo\'q'}
+📝 <b>Sarlavha:</b> ${adData.title}
+🏷️ <b>Kategoriya:</b> ${getCategoryName(adData.category)}
+📍 <b>Joylashuv:</b> ${adData.location}
+📄 <b>Tavsif:</b> ${adData.description}
+🖼️ <b>Rasm:</b> ${adData.image || 'Yo\'q'}
+💰 <b>Tarif:</b> ${planPrices[adData.plan]}
+📅 <b>Sana:</b> ${new Date().toLocaleString('uz-UZ')}
+            `.trim();
+
+            try {
+                const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CONFIG.adminChatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    showStatus("✅ Reklama taklifingiz yuborildi! Tez orada aloqaga chiqamiz.", "success");
+                    closeAddAdModal();
+                } else {
+                    throw new Error(data.description);
+                }
+
+            } catch (error) {
+                console.error('Telegram Error:', error);
+                showStatus("❌ Xatolik: " + error.message, "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> YUBORISH';
+            }
+        }
+
+        // ========================================
+        // HELPERS
+        // ========================================
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num;
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                business: 'Biznes',
+                education: 'Ta\'lim',
+                services: 'Xizmatlar',
+                products: 'Mahsulotlar',
+                events: 'Tadbirlar'
+            };
+            return names[category] || category;
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMsg');
+            statusEl.innerText = message;
+            statusEl.className = `status-message status-${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modals on outside click
+        document.getElementById('adModal').addEventListener('click', (e) => {
+            if (e.target.id === 'adModal') {
+                closeAdModal();
+            }
+        });
+
+        document.getElementById('addAdModal').addEventListener('click', (e) => {
+            if (e.target.id === 'addAdModal') {
+                closeAddAdModal();
+            }
+        });
+    </script>
+</body>
+</html>
