@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shohcore12 | Qidiruv</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --bg: #0a0e1a;
+            --bg-card: #151e32;
+            --bg-hover: #1e2a45;
+            --text: #f8fafc;
+            --text-sec: #94a3b8;
+            --border: #2d3748;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 85px;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--gradient); border-radius: 4px; }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(30px);
+            padding: 20px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .search-input-wrapper:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow), var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sec);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .search-input-wrapper:focus-within .search-icon {
+            color: var(--primary);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px 18px 60px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-sec);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-hover);
+            border: none;
+            color: var(--text-sec);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .clear-search:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .clear-search.active {
+            display: flex;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-sec);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 5px;
+        }
+
+        .results-count {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+        }
+
+        .results-count span {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .sort-dropdown {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .profiles-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-card:hover {
+            transform: translateX(5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow), 0 0 20px var(--primary-glow);
+        }
+
+        .profile-card:hover::before {
+            opacity: 1;
+        }
+
+        .profile-card-avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+            flex-shrink: 0;
+        }
+
+        .profile-card-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .profile-card-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-card-handle {
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            margin-bottom: 6px;
+        }
+
+        .profile-card-bio {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-card-stats {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .profile-card-posts {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            display: block;
+        }
+
+        .profile-card-posts-label {
+            font-size: 0.75rem;
+            color: var(--text-sec);
+        }
+
+        .profile-card-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            border: none;
+            color: var(--text-sec);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .profile-card-action:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-sec);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .empty-title {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .empty-text {
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--primary-light) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(21, 30, 50, 0.98);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 500;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            color: var(--text-sec);
+            font-size: 0.75rem;
+            text-align: center;
+            text-decoration: none;
+            width: 20%;
+            transition: all 0.3s;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-item:hover::after {
+            width: 30px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-light);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+        }
+
+        .nav-item.active::after {
+            width: 40px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-card {
+            animation: slideIn 0.4s ease backwards;
+        }
+
+        .profile-card:nth-child(1) { animation-delay: 0.05s; }
+        .profile-card:nth-child(2) { animation-delay: 0.1s; }
+        .profile-card:nth-child(3) { animation-delay: 0.15s; }
+        .profile-card:nth-child(4) { animation-delay: 0.2s; }
+        .profile-card:nth-child(5) { animation-delay: 0.25s; }
+        .profile-card:nth-child(6) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">SHOH<span>CORE12</span></div>
+    </div>
+
+    <!-- SEARCH CONTAINER -->
+    <div class="search-container">
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Profil qidirish (ism, username)..."
+                    autocomplete="off"
+                >
+                <button class="clear-search" id="clearSearch" onclick="clearSearch()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCategory('all')">
+                <i class="fas fa-th"></i> Barchasi
+            </button>
+            <button class="filter-btn" onclick="filterCategory('blogger')">
+                <i class="fas fa-camera"></i> Bloggerlar
+            </button>
+            <button class="filter-btn" onclick="filterCategory('music')">
+                <i class="fas fa-music"></i> Xonandalar
+            </button>
+            <button class="filter-btn" onclick="filterCategory('shop')">
+                <i class="fas fa-store"></i> Do'konlar
+            </button>
+            <button class="filter-btn" onclick="filterCategory('tech')">
+                <i class="fas fa-laptop"></i> Texnika
+            </button>
+            <button class="filter-btn" onclick="filterCategory('sport')">
+                <i class="fas fa-dumbbell"></i> Sport
+            </button>
+        </div>
+
+        <!-- Results Info -->
+        <div class="results-info">
+            <div class="results-count" id="resultsCount">
+                <span>20</span> profil topildi
+            </div>
+            <select class="sort-dropdown" id="sortDropdown" onchange="sortProfiles()">
+                <option value="popular">Ommabop</option>
+                <option value="newest">Yangi</option>
+                <option value="name-asc">A-Z</option>
+                <option value="name-desc">Z-A</option>
+            </select>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="profiles-grid" id="profilesGrid">
+            <!-- Profiles will be injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-search empty-icon"></i>
+            <div class="empty-title">Profil topilmadi</div>
+            <div class="empty-text">Qidiruv so'zingizni o'zgartirib ko'ring</div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Bosh Sahifa
+        </a>
+        <a href="qidiruv.html" class="nav-item active">
+            <i class="fas fa-search"></i>
+            Qidiruv
+        </a>
+        <a href="music.html" class="nav-item">
+            <i class="fas fa-music"></i>
+            Musiqa
+        </a>
+        <a href="shop.html" class="nav-item">
+            <i class="fas fa-shopping-bag"></i>
+            Shop
+        </a>
+        <a href="ads.html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            Reklama
+        </a>
+    </div>
+
+    <script>
+        // ========================================
+        // 👥 PROFILES DATABASE
+        // ========================================
+        const PROFILES = [
+            { id: 1, name: "Shohjahon", handle: "@shohcore12", bio: "Shohcore12 asoschisi | Dasturchi | Blogger", img: "final-image.jpg", posts: 42, category: "blogger" },
+            { id: 2, name: "Madina Karimova", handle: "@madina_style", bio: "Fashion & Lifestyle | Toshkent 🇺", img: "https://i.pravatar.cc/150?u=2", posts: 120, category: "blogger" },
+            { id: 3, name: "Ali Valiyev", handle: "@ali_music", bio: "Xonanda | Yangi albom tez orada 🎵", img: "https://i.pravatar.cc/150?u=3", posts: 85, category: "music" },
+            { id: 4, name: "Rustam Tech", handle: "@rustam_fix", bio: "Telefon ta'mirlash | Sifat kafolati 🔧", img: "https://i.pravatar.cc/150?u=4", posts: 200, category: "tech" },
+            { id: 5, name: "Dilnoza Dance", handle: "@dily_dance", bio: "Professional raqqosa | Choreograf 💃", img: "https://i.pravatar.cc/150?u=5", posts: 95, category: "blogger" },
+            { id: 6, name: "Botir Qodirov", handle: "@botir_auto", bio: "Avtosalon | Nexia 3, Cobalt 🚗", img: "https://i.pravatar.cc/150?u=6", posts: 150, category: "shop" },
+            { id: 7, name: "Zarina Beauty", handle: "@zarina_makeup", bio: "Professional Make-up artist 💄", img: "https://i.pravatar.cc/150?u=7", posts: 300, category: "shop" },
+            { id: 8, name: "Jasur Gamer", handle: "@jasur_play", bio: "PUBG & COD Mobile | Streamer 🎮", img: "https://i.pravatar.cc/150?u=8", posts: 500, category: "blogger" },
+            { id: 9, name: "Nargiza Khanum", handle: "@nargiza_cook", bio: "Mazali taomlar retseptlari 🍳", img: "https://i.pravatar.cc/150?u=9", posts: 210, category: "blogger" },
+            { id: 10, name: "Akmal Sport", handle: "@akmal_gym", bio: "Fitness murabbiyi | Natijaga erish 💪", img: "https://i.pravatar.cc/150?u=10", posts: 110, category: "sport" },
+            { id: 11, name: "Lola Artist", handle: "@lola_draw", bio: "Rassom | Buyurtma asosida portret 🎨", img: "https://i.pravatar.cc/150?u=11", posts: 60, category: "blogger" },
+            { id: 12, name: "Sardor Travel", handle: "@sardor_uz", bio: "Sayohat | O'zbekiston go'zalliklari 🌍", img: "https://i.pravatar.cc/150?u=12", posts: 400, category: "blogger" },
+            { id: 13, name: "Malika Fashion", handle: "@malika_clothes", bio: "Ayollar kiyimlari do'koni 👗", img: "https://i.pravatar.cc/150?u=13", posts: 180, category: "shop" },
+            { id: 14, name: "Umid Comedian", handle: "@umid_kulgu", bio: "Kulgili videolar | Kunni shod o'tkazing 😂", img: "https://i.pravatar.cc/150?u=14", posts: 800, category: "blogger" },
+            { id: 15, name: "Diyor Photo", handle: "@diyor_lens", bio: "Foto va Video operator 📸", img: "https://i.pravatar.cc/150?u=15", posts: 90, category: "tech" },
+            { id: 16, name: "Sevara Singer", handle: "@sevara_voice", bio: "Vokal darslari | Online darslar 🎤", img: "https://i.pravatar.cc/150?u=16", posts: 70, category: "music" },
+            { id: 17, name: "Anvar Builder", handle: "@anvar_home", bio: "Uy ta'mirlash | Sifatli remont 🏠", img: "https://i.pravatar.cc/150?u=17", posts: 50, category: "shop" },
+            { id: 18, name: "Kamola Edu", handle: "@kamola_english", bio: "Ingliz tili o'qituvchisi 📚", img: "https://i.pravatar.cc/150?u=18", posts: 300, category: "blogger" },
+            { id: 19, name: "Ravshan IT", handle: "@ravshan_code", bio: "Dasturlash kurslari | Python, JS 💻", img: "https://i.pravatar.cc/150?u=19", posts: 120, category: "tech" },
+            { id: 20, name: "Nigora Life", handle: "@nigora_daily", bio: "Kundalik hayotim | Vloglar 📹", img: "https://i.pravatar.cc/150?u=20", posts: 550, category: "blogger" }
+        ];
+
+        // ========================================
+        // STATE
+        // ========================================
+        let currentFilter = 'all';
+        let currentSort = 'popular';
+        let searchQuery = '';
+
+        // ========================================
+        // INIT
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProfiles(PROFILES);
+            
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                updateClearButton();
+                filterAndRender();
+            });
+        });
+
+        // ========================================
+        // RENDER PROFILES
+        // ========================================
+        function renderProfiles(profiles) {
+            const grid = document.getElementById('profilesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (profiles.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                resultsCount.innerHTML = '<span>0</span> profil topildi';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            resultsCount.innerHTML = `<span>${profiles.length}</span> profil topildi`;
+
+            grid.innerHTML = profiles.map(profile => `
+                <div class="profile-card fade-in" onclick="openProfile(${profile.id})">
+                    <img src="${profile.img}" alt="${profile.name}" class="profile-card-avatar">
+                    <div class="profile-card-info">
+                        <div class="profile-card-name">${highlightText(profile.name)}</div>
+                        <div class="profile-card-handle">${highlightText(profile.handle)}</div>
+                        <div class="profile-card-bio">${profile.bio}</div>
+                    </div>
+                    <div class="profile-card-stats">
+                        <span class="profile-card-posts">${profile.posts}</span>
+                        <span class="profile-card-posts-label">post</span>
+                    </div>
+                    <button class="profile-card-action" onclick="event.stopPropagation(); openProfile(${profile.id})">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // ========================================
+        // HIGHLIGHT SEARCH TEXT
+        // ========================================
+        function highlightText(text) {
+            if (!searchQuery) return text;
+            const regex = new RegExp(`(${searchQuery})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        // ========================================
+        // FILTER CATEGORY
+        // ========================================
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.filter-btn').classList.add('active');
+            
+            filterAndRender();
+        }
+
+        // ========================================
+        // SORT PROFILES
+        // ========================================
+        function sortProfiles() {
+            currentSort = document.getElementById('sortDropdown').value;
+            filterAndRender();
+        }
+
+        // ========================================
+        // FILTER AND RENDER
+        // ========================================
+        function filterAndRender() {
+            let filtered = [...PROFILES];
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(p => p.category === currentFilter);
+            }
+
+            if (searchQuery) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.handle.toLowerCase().includes(searchQuery) ||
+                    p.bio.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            switch (currentSort) {
+                case 'popular':
+                    filtered.sort((a, b) => b.posts - a.posts);
+                    break;
+                case 'newest':
+                    filtered.sort((a, b) => b.id - a.id);
+                    break;
+                case 'name-asc':
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filtered.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+            }
+
+            renderProfiles(filtered);
+        }
+
+        // ========================================
+        // CLEAR SEARCH
+        // ========================================
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            updateClearButton();
+            filterAndRender();
+            document.getElementById('searchInput').focus();
+        }
+
+        function updateClearButton() {
+            const clearBtn = document.getElementById('clearSearch');
+            if (searchQuery.length > 0) {
+                clearBtn.classList.add('active');
+            } else {
+                clearBtn.classList.remove('active');
+            }
+        }
+
+        // ========================================
+        // OPEN PROFILE - UPDATED
+        // ========================================
+        function openProfile(id) {
+            // Redirect to index.html with profile parameter
+            window.location.href = `index.html?profile=${id}`;
+        }
+    </script>
+</body>
+</html>
